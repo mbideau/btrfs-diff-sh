@@ -113,6 +113,16 @@ SEE ALSO
 
 ### Using `git` and `make`
 
+Install the required dependencies (example for *Debian* / *Ubuntu*)
+
+```sh
+~> sudo apt install make gettext gzip tar grep sed mawk coreutils
+```
+
+Install [gimme-a-man](https://github.com/mbideau/gimme-a-man), to be able to generate the manual
+pages.  
+It needs to be in the *PATH*.
+
 Get the sources
 
 ```sh
@@ -264,7 +274,7 @@ Cool features implemented :
 
 Technical features :
 
-* [KISS](https://simple.wikipedia.org/wiki/KISS_(principle\)): very simple construction with a few
+* [KISS](https://simple.wikipedia.org/wiki/KISS_(principle)): very simple construction with a few
 lines of SHELL, with no dependency (except some *GNU coreutils* binaries)
 * portable *POSIX SHELL*, syntaxicaly checked with `shellcheck`
 * *Makefile* that automatically build locales and man pages, but also `dist` to get a tarball of the
