@@ -1,0 +1,192 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: btrfs_diff 0.0.1\n"
+"Report-Msgid-Bugs-To: mica.devel@gmail.com\n"
+"POT-Creation-Date: 2020-12-17 23:49+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: btrfs_diff.sh:138
+msgid "ARGUMENTS"
+msgstr ""
+
+#: btrfs_diff.sh:185
+msgid "AUTHORS"
+msgstr ""
+
+#: btrfs_diff.sh:195
+msgid "COPYRIGHT"
+msgstr ""
+
+#: btrfs_diff.sh:157
+msgid "Display help message."
+msgstr ""
+
+#: btrfs_diff.sh:160
+msgid "Display version and licence informations."
+msgstr ""
+
+#: btrfs_diff.sh:170
+msgid "ENVIRONMENT"
+msgstr ""
+
+#: btrfs_diff.sh:163
+msgid "EXAMPLES"
+msgstr ""
+
+#: btrfs_diff.sh:241
+msgid "Fatal error: invalid option"
+msgstr ""
+
+#: btrfs_diff.sh:518 btrfs_diff.sh:534
+msgid "Fatal error: when deleting '%s', it wasn't found in the objects buffer"
+msgstr ""
+
+#: btrfs_diff.sh:486
+msgid "Fatal error: when extending '%s', it wasn't found in the objects buffer"
+msgstr ""
+
+#: btrfs_diff.sh:414
+msgid ""
+"Fatal error: when renaming '%s' to '%s', the operation '%s' found is invalid"
+msgstr ""
+
+#: btrfs_diff.sh:404
+msgid ""
+"Fatal error: when renaming '%s' to '%s', the source wasn't found in the "
+"objects buffer"
+msgstr ""
+
+#: btrfs_diff.sh:374
+msgid ""
+"Fatal error: when symlinking '%s' to '%s', the destination wasn't found in "
+"the objects buffer"
+msgstr ""
+
+#: btrfs_diff.sh:165
+msgid "Get the differences between two XMas backups."
+msgstr ""
+
+#: btrfs_diff.sh:204
+msgid "Home page"
+msgstr ""
+
+#: btrfs_diff.sh:178
+msgid "Influence the translation."
+msgstr ""
+
+#: btrfs_diff.sh:146
+msgid "It must also be a read-only one."
+msgstr ""
+
+#: btrfs_diff.sh:142
+msgid "It must be a read-only one."
+msgstr ""
+
+#: btrfs_diff.sh:224
+msgid "License %s: %s <%s>"
+msgstr ""
+
+#: btrfs_diff.sh:149
+msgid "OPTIONS"
+msgstr ""
+
+#: btrfs_diff.sh:145
+msgid "Path to the compared snapshot."
+msgstr ""
+
+#: btrfs_diff.sh:141
+msgid "Path to the reference snapshot."
+msgstr ""
+
+#: btrfs_diff.sh:173
+msgid "Print debuging information to '%s' only if var DEBUG='%s'."
+msgstr ""
+
+#: btrfs_diff.sh:190
+msgid "REPORTING BUGS"
+msgstr ""
+
+#: btrfs_diff.sh:192
+msgid "Report bugs to"
+msgstr ""
+
+#: btrfs_diff.sh:154
+msgid "Report properties differences %s"
+msgstr ""
+
+#: btrfs_diff.sh:151
+msgid "Report times differences %s"
+msgstr ""
+
+#: btrfs_diff.sh:202
+msgid "SEE ALSO"
+msgstr ""
+
+#: btrfs_diff.sh:132 btrfs_diff.sh:144
+msgid "SNAP_CMP"
+msgstr ""
+
+#: btrfs_diff.sh:132 btrfs_diff.sh:140
+msgid "SNAP_REF"
+msgstr ""
+
+#: btrfs_diff.sh:182
+msgid "The %s should be empty, or at least do not conflict with the %s."
+msgstr ""
+
+#: btrfs_diff.sh:179
+msgid ""
+"The %s should be pointed toward the locales folder where the Machine-Object "
+"file are installed."
+msgstr ""
+
+#: btrfs_diff.sh:181
+msgid "The %s should specify a proper locale (i.e.: '%s')."
+msgstr ""
+
+#: btrfs_diff.sh:231
+msgid "There is NO WARRANTY, to the extent permitted by law."
+msgstr ""
+
+#: btrfs_diff.sh:225
+msgid "This is free software: you are free to change and redistribute it."
+msgstr ""
+
+#: btrfs_diff.sh:130
+msgid "USAGE"
+msgstr ""
+
+#: btrfs_diff.sh:574
+msgid "Warning: unknown raw line '%s'"
+msgstr ""
+
+#: btrfs_diff.sh:187
+msgid "Written by"
+msgstr ""
+
+#: btrfs_diff.sh:292
+msgid "added"
+msgstr ""
+
+#: btrfs_diff.sh:294
+msgid "changed"
+msgstr ""
+
+#: btrfs_diff.sh:293
+msgid "deleted"
+msgstr ""
+
+#: btrfs_diff.sh:128
+msgid "get differences between two BTRFS snapshots."
+msgstr ""

@@ -1,0 +1,292 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: 0.0.1\n"
+"Report-Msgid-Bugs-To: mica.devel@gmail.com\n"
+"POT-Creation-Date: 2021-01-25 13:18+0100\n"
+"PO-Revision-Date: 2020-12-12\n"
+"Last-Translator: Michael Bideau <mica.devel@gmail.com> [France]\n"
+"Language-Team: none\n"
+"Language: btrfs-diff\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: btrfs_diff.sh:346
+msgid "  added"
+msgstr "  ajouté"
+
+#: btrfs_diff.sh:350
+msgid "  props"
+msgstr "   props"
+
+#: btrfs_diff.sh:351
+msgid "  times"
+msgstr "   temps"
+
+#: btrfs_diff.sh:163
+msgid "A file containing the output of the command '%s'."
+msgstr "Un fichier contenant l'affichage de la commande '%s'."
+
+#: btrfs_diff.sh:152
+msgid "ARGUMENTS"
+msgstr "ARGUMENTS"
+
+#: btrfs_diff.sh:219
+msgid "AUTHORS"
+msgstr "AUTEURS"
+
+#: btrfs_diff.sh:229
+msgid "COPYRIGHT"
+msgstr "COPYRIGHT"
+
+#: btrfs_diff.sh:170
+msgid "Compare the result against the output of the standard '%s' utility."
+msgstr "Comparer le résultat avec l'affichage de l'utilitaire standard '%s'."
+
+#: btrfs_diff.sh:833
+msgid "Comparison with standard '%s' utility :"
+msgstr "Comparaison avec l'utilitaire standard '%s':"
+
+#: btrfs_diff.sh:197
+msgid "Create the dump of the send/receive between two snapshots."
+msgstr "Créé le dump de l'envoi/réception entre les deux snapshots."
+
+#: btrfs_diff.sh:146 btrfs_diff.sh:162
+msgid "DUMP_FILE"
+msgstr "FIC_DUMP"
+
+#: btrfs_diff.sh:184
+msgid "Display help message."
+msgstr "Afficher le message d'aide."
+
+#: btrfs_diff.sh:187
+msgid "Display version and license informations."
+msgstr "Afficher les informations de version et de licence."
+
+#: btrfs_diff.sh:206
+msgid "ENVIRONMENT"
+msgstr "ENVIRONNEMENT"
+
+#: btrfs_diff.sh:190
+msgid "EXAMPLES"
+msgstr "EXEMPLES"
+
+#: btrfs_diff.sh:330
+msgid ""
+"Fatal error: failed to get a raw diff with send/received for snapshots '%s' "
+"and '%s'"
+msgstr ""
+"Erreur fatale: échec de la production du diff 'brut' avec l'envoi/réception "
+"pour les snapshots '%s' et '%s'"
+
+#: btrfs_diff.sh:262
+msgid "Fatal error: invalid option"
+msgstr "Erreur fatale: option invalide."
+
+#: btrfs_diff.sh:340
+msgid "Fatal error: the file '%s' doesn't exist or is not readable"
+msgstr "Erreur fatale: le fichier '%s' n'existe pas ou n'est pas lisible"
+
+#: btrfs_diff.sh:577
+msgid "Fatal error: when cloning '%s', it wasn't found in the objects buffer"
+msgstr ""
+"Erreur fatale: lors du clonage de '%s', introuvable dans le tampon des objets"
+
+#: btrfs_diff.sh:639 btrfs_diff.sh:663
+msgid "Fatal error: when deleting '%s', it wasn't found in the objects buffer"
+msgstr ""
+"Erreur fatale: lors de la suppression de '%s', introuvable dans le tampon "
+"des objets"
+
+#: btrfs_diff.sh:550
+msgid "Fatal error: when extending '%s', it wasn't found in the objects buffer"
+msgstr ""
+"Erreur fatale: lors de l'extension de '%s', introuvable dans le tampon des "
+"objets"
+
+#: btrfs_diff.sh:465
+msgid ""
+"Fatal error: when renaming '%s' to '%s', the operation '%s' found is invalid"
+msgstr ""
+"Erreur fatale: lors du renommage de '%s' en '%s', l'opération '%s' trouvée "
+"est invalide"
+
+#: btrfs_diff.sh:453
+msgid ""
+"Fatal error: when renaming '%s' to '%s', the source wasn't found in the "
+"objects buffer"
+msgstr ""
+"Erreur fatale: lors du renommage de '%s' en '%s', la source était "
+"introuvable dans le tampon des objets"
+
+#: btrfs_diff.sh:422
+msgid ""
+"Fatal error: when symlinking '%s' to '%s', the destination wasn't found in "
+"the objects buffer"
+msgstr ""
+"Erreur fatale: lors du renommage de '%s' en '%s', la destination était "
+"introuvable dans le tampon des objets"
+
+#: btrfs_diff.sh:602
+msgid ""
+"Fatal error: when truncating '%s', it wasn't found in the objects buffer"
+msgstr ""
+"Erreur fatale: lors du tronquage de '%s', introuvable dans le tampon des "
+"objets"
+
+#: btrfs_diff.sh:192 btrfs_diff.sh:202
+msgid "Get the differences between two snapshots."
+msgstr "Analyse les différences entre deux snapshots."
+
+#: btrfs_diff.sh:236
+msgid "Home page"
+msgstr "Page d'accueil"
+
+#: btrfs_diff.sh:215
+msgid "Influence the translation."
+msgstr "Influence la traduction."
+
+#: btrfs_diff.sh:175
+msgid ""
+"Instead of two snapshots, use a file containing the %s output of the "
+"snapshots."
+msgstr ""
+"Au lieu de deux snapshots, utilise un fichier contenant l'affichage de %s "
+"des snapshots."
+
+#: btrfs_diff.sh:160
+msgid "It must also be a read-only one."
+msgstr "Doit aussi être en lecture-seule."
+
+#: btrfs_diff.sh:156
+msgid "It must be a read-only one."
+msgstr "Doit être en lecture-seule."
+
+#: btrfs_diff.sh:248
+msgid "License %s: %s <%s>"
+msgstr "Licence %s: %s <%s>"
+
+#: btrfs_diff.sh:831
+msgid "Note: same output as with the standard '%s' utility"
+msgstr "Note: affichage identique à l'utilitaire standard '%s'"
+
+#: btrfs_diff.sh:167
+msgid "OPTIONS"
+msgstr "OPTIONS"
+
+#: btrfs_diff.sh:159
+msgid "Path to the compared snapshot."
+msgstr "Chemin vers le snapshot comparé."
+
+#: btrfs_diff.sh:155
+msgid "Path to the reference snapshot."
+msgstr "Chemin vers le snapshot de référence."
+
+#: btrfs_diff.sh:209
+msgid "Print debugging information to '%s' only if var %s='%s'."
+msgstr "Affiche des informations de déboguage sur '%s' seulement si %s='%s'."
+
+#: btrfs_diff.sh:795
+msgid ""
+"Producing a diff using standard '%s' utility ... (might takes a little time)"
+msgstr ""
+"Production des différences à l'aide de l'utilitaire standard '%s' ... (ça "
+"pourrait prendre un peu temps)"
+
+#: btrfs_diff.sh:224
+msgid "REPORTING BUGS"
+msgstr "RAPPORTER LES BOGUES"
+
+#: btrfs_diff.sh:226
+msgid "Report bugs to"
+msgstr "Rapporter les bogues à"
+
+#: btrfs_diff.sh:181
+msgid "Report properties differences %s"
+msgstr "Reporter les différences de propriétés %s."
+
+#: btrfs_diff.sh:178
+msgid "Report times differences %s"
+msgstr "Reporter les différences de temps %s"
+
+#: btrfs_diff.sh:234
+msgid "SEE ALSO"
+msgstr "VOIR AUSSI"
+
+#: btrfs_diff.sh:145 btrfs_diff.sh:158
+msgid "SNAP_CMP"
+msgstr "SNAP_CMP"
+
+#: btrfs_diff.sh:145 btrfs_diff.sh:154
+msgid "SNAP_REF"
+msgstr "SNAP_REF"
+
+#: btrfs_diff.sh:216
+msgid "See %s documentation."
+msgstr "Voir la documentation de %s."
+
+#: btrfs_diff.sh:250
+msgid "There is NO WARRANTY, to the extent permitted by law."
+msgstr "Il n'y aucune GARANTIE, dans la limite de ce que permet la loi."
+
+#: btrfs_diff.sh:249
+msgid "This is free software: you are free to change and redistribute it."
+msgstr ""
+"Ceci est un logiciel libre: vous être libre de le modifier et de le "
+"redistribuer."
+
+#: btrfs_diff.sh:172
+msgid "This option is ignored when the option '%s' is also specified."
+msgstr "Cette option est ignorée lorsque l'option '%s' est aussi spécifiée."
+
+#: btrfs_diff.sh:143
+msgid "USAGE"
+msgstr "USAGE"
+
+#: btrfs_diff.sh:845
+msgid "Warning: can't compare to standard '%s' utility (binary not found)"
+msgstr ""
+"Avertissement: impossible de comparer avec l'utilitaire standard "
+"'%s' (binaire non trouvé)"
+
+#: btrfs_diff.sh:841
+msgid "Warning: failed to collect the differences between the two results"
+msgstr ""
+"Avertissement: échec de la collecte des différences entre les deux résultats"
+
+#: btrfs_diff.sh:818
+msgid "Warning: failed to compare both diffs (using standard '%s')"
+msgstr ""
+"Avertissement: échec de la comparaison des différences (utilisant le '%s' "
+"standard)"
+
+#: btrfs_diff.sh:706
+msgid "Warning: unknown raw line '%s'"
+msgstr "Avertissement: ligne brute inconnue '%s'"
+
+#: btrfs_diff.sh:221
+msgid "Written by"
+msgstr "Écrit par"
+
+#: btrfs_diff.sh:348
+msgid "changed"
+msgstr "  changé"
+
+#: btrfs_diff.sh:347
+msgid "deleted"
+msgstr "supprimé"
+
+#: btrfs_diff.sh:141
+msgid "get differences between two BTRFS snapshots."
+msgstr "analyse les différences entre deux snapshots BTRFS."
+
+#: btrfs_diff.sh:349
+msgid "renamed"
+msgstr " renommé"
+
+#~ msgid ""
+#~ "Fatal error: failed to produce differences with the standard '%s' utility"
+#~ msgstr ""
+#~ "Erreur fatale: échec de la production des différences avec l'utilitaire "
+#~ "standard '%s'"
