@@ -178,25 +178,25 @@ diff utility (which just produce then parse that dump file format).
 As the time of writing this (i.e.: Dec. 2020), I have found 2 projects matching `btrfs diff`
 in *Github* and 0 in *Gitlab*.
 
-[btrfs-send-go](https://github.com/bucko909/btrfs-send-go) [GO]
-    Very raw, and have minor bugs, but does excatly the job.  
-    I have improved it in [my own fork](https://github.com/mbideau/btrfs-diff-go), but it seems to
-    crash on *clone* instructions.  
-    Also, having a compiled binary, is not super hackable (even a tiny one like this) and at
-    deployment time, it might miss some dependencies (I have managed to build it statically but it
-    doesn't work in my *initram*, I have not found out why).  
-    Finally it was not translatable (as-is).
+* [btrfs-send-go](https://github.com/bucko909/btrfs-send-go) [GO]
+  Very raw, and have minor bugs, but does excatly the job.  
+  I have improved it in [my own fork](https://github.com/mbideau/btrfs-diff-go), but it seems to
+  crash on *clone* instructions.  
+  Also, having a compiled binary, is not super hackable (even a tiny one like this) and at
+  deployment time, it might miss some dependencies (I have managed to build it statically but it
+  doesn't work in my *initram*, I have not found out why).  
+  Finally it was not translatable (as-is).
 
-[btrfs-snapshots-diff](https://github.com/sysnux/btrfs-snapshots-diff) [Python 2]
-    It has a lot of issues (with link, but not only), and is Python 2, which is deprecated by now.  
-    No go.
+* [btrfs-snapshots-diff](https://github.com/sysnux/btrfs-snapshots-diff) [Python 2]
+  It has a lot of issues (with link, but not only), and is Python 2, which is deprecated by now.  
+  No go.
 
-[btrfs-snapshots-diff](https://github.com/daviessm/btrfs-snapshots-diff)  [Python 3]
-    A fork of the previous one, with a lot of issues fixed and in *Python 3*.  
-    But because it is written in *Python*, it means that if I want to run it in *initram* (I do) I
-    will need to include the *Python* binary and the required dependancies. Too much for what I
-    want.  
-    May be I could compile it with *Cython*, but I am not (yet) comfortable with that.
+* [btrfs-snapshots-diff](https://github.com/daviessm/btrfs-snapshots-diff)  [Python 3]
+  A fork of the previous one, with a lot of issues fixed and in *Python 3*.  
+  But because it is written in *Python*, it means that if I want to run it in *initram* (I do) I
+  will need to include the *Python* binary and the required dependancies. Too much for what I
+  want.  
+  May be I could compile it with *Cython*, but I am not (yet) comfortable with that.
 
 There is also the [snapper](https://github.com/openSUSE/snapper) utility that compares BTRFS
 snapshots, but it does so by mounting both snapshots and doing a "standard" `diff` on them (if my
@@ -309,13 +309,6 @@ accept changes through *Pull Request*.
 
 ## Developing
 
-For being able to do a `make`, you will need the following binaries :
-
-* make
-* gettext, xgettext, msgfmt, msginit, msgmerge
-* gzip
-* tar
-
 Do your changes, then, in the source directory, just run :  
 ```sh
 ~> make
@@ -326,16 +319,16 @@ Do your changes, then, in the source directory, just run :
 And to be sure that the program is working in your environment, or that you have not broken
 anything while developing, you have to run the tests.
 
-In order to do that, you will need to have `shunit2` installed somewhere.  
+In order to do that, you will need to have [shunit2](https://github.com/kward/shunit2/) installed
+somewhere.  
 ```sh
-~> mkdir .tmp
-~> git clone -q https://github.com/kward/shunit2 .tmp/shunit2
+~> git clone -q https://github.com/kward/shunit2 .shunit2
 ```  
 NOTE: if you install *shunit2* in the .tmp directory, it will be deleted when doing a `make clean`.
 
 Then you can run the following command:  
 ```sh
-~> SHUNIT2=.tmp/shunit2 make test
+~> SHUNIT2=.shunit2 make test
 ```
 
 
