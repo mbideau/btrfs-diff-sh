@@ -43,7 +43,7 @@ set -e
 VERSION=0.1.0
 PACKAGE_NAME=btrfs-diff
 AUTHOR='Michael Bideau'
-HOME_PAGE='https://github.com/mbideau/btrfs-diff'
+HOME_PAGE='https://github.com/mbideau/btrfs-diff-sh'
 REPORT_BUGS_TO="$HOME_PAGE/issues"
 PROGRAM_NAME="$PACKAGE_NAME"
 
