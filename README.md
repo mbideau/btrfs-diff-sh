@@ -142,7 +142,7 @@ If you want to install it to /usr/bin, just replace the last instruction by :
 
 Extract the SHELL script from the repository :
 ```sh
-~> wget "https://github.com/mbideau/btrfs-diff-sh/raw/master/btrfs_diff.sh" /usr/local/bin/btrfs-diff
+~> wget "https://raw.githubusercontent.com/mbideau/btrfs-diff-sh/main/btrfs_diff.sh" /usr/local/bin/btrfs-diff
 ~> chmod +x /usr/local/bin/btrfs-diff
 ```
 You will not have the translations though, which could prevent you to correctly handle translated
