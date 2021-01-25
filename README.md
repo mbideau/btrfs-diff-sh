@@ -178,7 +178,7 @@ diff utility (which just produce then parse that dump file format).
 As the time of writing this (i.e.: Dec. 2020), I have found 2 projects matching `btrfs diff`
 in *Github* and 0 in *Gitlab*.
 
-* [btrfs-send-go](https://github.com/bucko909/btrfs-send-go) [GO]
+* [btrfs-send-go](https://github.com/bucko909/btrfs-send-go) [GO]  
   Very raw, and have minor bugs, but does excatly the job.  
   I have improved it in [my own fork](https://github.com/mbideau/btrfs-diff-go), but it seems to
   crash on *clone* instructions.  
@@ -187,11 +187,11 @@ in *Github* and 0 in *Gitlab*.
   doesn't work in my *initram*, I have not found out why).  
   Finally it was not translatable (as-is).
 
-* [btrfs-snapshots-diff](https://github.com/sysnux/btrfs-snapshots-diff) [Python 2]
+* [btrfs-snapshots-diff](https://github.com/sysnux/btrfs-snapshots-diff) [Python 2]  
   It has a lot of issues (with link, but not only), and is Python 2, which is deprecated by now.  
   No go.
 
-* [btrfs-snapshots-diff](https://github.com/daviessm/btrfs-snapshots-diff)  [Python 3]
+* [btrfs-snapshots-diff](https://github.com/daviessm/btrfs-snapshots-diff)  [Python 3]  
   A fork of the previous one, with a lot of issues fixed and in *Python 3*.  
   But because it is written in *Python*, it means that if I want to run it in *initram* (I do) I
   will need to include the *Python* binary and the required dependancies. Too much for what I
