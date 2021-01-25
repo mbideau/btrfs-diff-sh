@@ -30,7 +30,7 @@ ARGUMENTS
         It must also be a read-only one.
 
     DUMP_FILE
-        A file containing the ouptut of the command 'LC_ALL=C btrfs receive --quiet --dump'.
+        A file containing the output of the command 'LC_ALL=C btrfs receive --quiet --dump'.
 
 
 OPTIONS
@@ -40,13 +40,13 @@ OPTIONS
         This option is ignored when the option '--file' is also specified.
 
     -f | --file
-        Instead of two snapshots, use a file containing the send/receive ouptut of the snapshots.
+        Instead of two snapshots, use a file containing the send/receive output of the snapshots.
 
     -t | --with-times
         Report times differences (atime, mtime, ctime)
 
     -p | --with-props
-        Report properties differences (chmod, chown)
+        Report properties differences (chmod, chown, set_xattr)
 
     -h | --help
         Display help message.
@@ -74,7 +74,7 @@ EXAMPLES
 ENVIRONMENT
 
     DEBUG
-        Print debuging information to 'STDERR' only if var DEBUG='btrfs-diff'.
+        Print debugging information to 'STDERR' only if var DEBUG='btrfs-diff'.
 
     LANGUAGE
     LC_ALL
