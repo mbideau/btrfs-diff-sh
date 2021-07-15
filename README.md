@@ -1,12 +1,18 @@
 # btrfs-diff-sh
 
+[![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0)
+![Build](https://github.com/mbideau/btrfs-diff-sh/workflows/Build/badge.svg)
+![Shellcheck](https://github.com/mbideau/btrfs-diff-sh/workflows/Shellcheck/badge.svg)
+[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg)](CODE_OF_CONDUCT.md)
+
 Analyze differences between two BTRFS snapshots (like
 [GNU diff](https://www.gnu.org/software/diffutils/manual/) for directories).
 
 ## USAGE
 
 This is the output of `btrfs-diff --help` :
-```
+
+```text
 
 btrfs-diff - get differences between two BTRFS snapshots.
 
@@ -96,7 +102,7 @@ REPORTING BUGS
 
 COPYRIGHT
 
-    Copyright (C) 2020-2021 Michael Bideau.
+    Copyright (©) 2020-2021 Michael Bideau.
     License GPLv3+: GNU GPL version 3 or later <https://gnu.org/licenses/gpl.html>
     This is free software: you are free to change and redistribute it.
     There is NO WARRANTY, to the extent permitted by law.
@@ -134,6 +140,7 @@ Get the sources
 This will install it to `/usr/local/bin/btrfs-diff`.
 
 If you want to install it to /usr/bin, just replace the last instruction by :  
+
 ```sh
 ~> make install prefix=/usr
 ```
@@ -141,10 +148,12 @@ If you want to install it to /usr/bin, just replace the last instruction by :
 ### The raw / hacker way, using `wget` or `curl`
 
 Extract the SHELL script from the repository :
+
 ```sh
 ~> wget "https://raw.githubusercontent.com/mbideau/btrfs-diff-sh/main/btrfs_diff.sh" /usr/local/bin/btrfs-diff
 ~> chmod +x /usr/local/bin/btrfs-diff
 ```
+
 You will not have the translations though, which could prevent you to correctly handle translated
 `--help` message.
 
@@ -158,12 +167,13 @@ snapshoting like BTRFS is that producing the differences between two snapshots i
 instantaneous.
 
 For example, you can get the differences between *snap1* and *snap2* with the following command :
+
 ```sh
 ~> btrfs send --quiet --no-data -p snap1 snap2 | LC_ALL=C btrfs receive --quiet --dump > /tmp/btrfs.dump
 ```
 
-But that differences dump is not really human readable. It contains operations, not differences. So
-it is not exactly what we are looking for. For example it might contains transient object
+Note that this dump is not really human readable. Moreover it contains operations, not differences.
+So it is not exactly what we are looking for. For example it might contains transient object
 informations, and multiple lines of unintuitive operations to reproduce a file state.
 
 I wanted a differences file format like the one you have when doing `diff -rq` or
@@ -179,7 +189,7 @@ As the time of writing this (i.e.: Dec. 2020), I have found 2 projects matching 
 in *Github* and 0 in *Gitlab*.
 
 * [btrfs-send-go](https://github.com/bucko909/btrfs-send-go) [GO]  
-  Very raw, and have minor bugs, but does excatly the job.  
+  Raw, and have minor bugs, but does exactly the job.  
   I have improved it in [my own fork](https://github.com/mbideau/btrfs-diff-go), but it seems to
   crash on *clone* instructions.  
   Also, having a compiled binary, is not super hackable (even a tiny one like this) and at
@@ -193,8 +203,8 @@ in *Github* and 0 in *Gitlab*.
 
 * [btrfs-snapshots-diff](https://github.com/daviessm/btrfs-snapshots-diff)  [Python 3]  
   A fork of the previous one, with a lot of issues fixed and in *Python 3*.  
-  But because it is written in *Python*, it means that if I want to run it in *initram* (I do) I
-  will need to include the *Python* binary and the required dependancies. Too much for what I
+  Because it is written in *Python*, it means that if I want to run it in *initram* (I do) I
+  will need to include the *Python* binary and the required dependencies. Too much for what I
   want.  
   May be I could compile it with *Cython*, but I am not (yet) comfortable with that.
 
@@ -202,7 +212,7 @@ There is also the [snapper](https://github.com/openSUSE/snapper) utility that co
 snapshots, but it does so by mounting both snapshots and doing a "standard" `diff` on them (if my
 understanding is correct).
 
-Finally I have found a lot of small Python script doing a BTRFS diff, but they were using a very
+Finally I have found a lot of small Python script doing a BTRFS diff, but they were using a
 hacky way to do it (based on the `find-new` method), without being able to catch deletions.  
 They were better-than-nothing prior to `btrfs send` and `btrfs receive`, but they are obsolete
 since. Hence, I skipped all those.
@@ -220,17 +230,20 @@ to produce a human friendly diff.
 
 #### Output formatting
 
-For the output format, I choose a very simple one:  
+For the output format, I choose a simple one:  
+
+```text
+ operation: file
+ operation: file
+ …
 ```
- <operation>: <file>  
- <operation>: <file>  
- <operation>: <file>  
-```
-where <operation> is the (eventually translated) name of the operation, and <file> is the path of
+
+Where `operation` is the (eventually translated) name of the operation, and `file` is the path of
 the file impacted.
 
 For example it could produce something like:  
-```
+
+```text
   added: /testdir
   times: /
   added: /testdir/file.txt
@@ -258,7 +271,7 @@ section.
 
 As expected, it was tricky to get this working because there many small subtleties in the raw
 format.  
-But by using temporary files as buffers, I manage to only parse the file once.  
+Note that, by using temporary files as buffers, I manage to only parse the file once.  
 There is a minor re-tweaking of the resulting file though, to delete lines matching operations on
 deleted files/directories.
 
@@ -269,16 +282,16 @@ Cool features implemented :
 
 * can produce the raw diff from two snapshots or just parse a raw dump file
 * fully translated even the operation names (for now, only in french)
-* produces an output very close to the `diff -rq` utility and `git status --short`
+* produces an output close to the `diff -rq` utility and `git status --short`
 * can compare its result with the one from the `diff` utility
 
 Technical features :
 
-* [KISS](https://simple.wikipedia.org/wiki/KISS_(principle)): very simple construction with a few
-lines of SHELL, with no dependency (except some *GNU coreutils* binaries)
+* [KISS](https://simple.wikipedia.org/wiki/KISS_(principle)): simple construction with a few
+  lines of SHELL, with no dependency (except some *GNU coreutils* binaries)
 * portable *POSIX SHELL*, syntaxicaly checked with `shellcheck`
 * *Makefile* that automatically build locales and man pages, but also `dist` to get a tarball of the
-sources
+  sources
 * have debugging with environment variable `DEBUG=btrfs-diff`
 
 #### Limits / flaws
@@ -290,7 +303,7 @@ It is slow and doing many IO by using 5 temporary files as buffers.
 It was not tested on huge dumps, so it might not perform well or reveal majors bugs.
 
 Due to BTRFS implementation, some files appear as *changed*, when they are not (according to
-`diff` utility). I have absolutely no idea why BTRFS is acting like this... If someone can
+`diff` utility). I have absolutely no idea why BTRFS is acting like this… If someone can
 help me figures this out, I'll be glad.
 It turns out [btrfs-send-go](https://github.com/bucko909/btrfs-send-go) is having the same
 issue.
@@ -310,6 +323,7 @@ accept changes through *Pull Request*.
 ## Developing
 
 Do your changes, then, in the source directory, just run :  
+
 ```sh
 ~> make
 ```
@@ -321,12 +335,15 @@ anything while developing, you have to run the tests.
 
 In order to do that, you will need to have [shunit2](https://github.com/kward/shunit2/) installed
 somewhere.  
+
 ```sh
 ~> git clone -q https://github.com/kward/shunit2 .shunit2
-```  
+```
+
 NOTE: if you install *shunit2* in the .tmp directory, it will be deleted when doing a `make clean`.
 
 Then you can run the following command:  
+
 ```sh
 ~> SHUNIT2=.shunit2 make test
 ```
@@ -335,6 +352,7 @@ Then you can run the following command:
 ## Distribution
 
 If you want a clean tarball of the sources, you can run :  
+
 ```sh
 ~> make dist
 ```
@@ -342,20 +360,24 @@ If you want a clean tarball of the sources, you can run :
 
 ## Copyright and License GPLv3
 
-Copyright (C) 2020-2021 Michael Bideau [France]
+Copyright (©) 2020-2021 Michael Bideau [France]
 
-This file is part of btrfs-diff-sh.
+This file is part of `btrfs-diff-sh`.
 
-btrfs-diff-sh is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
+`btrfs-diff-sh` is free software: you can redistribute it and/or modify it under the terms of the GNU
+General Public License as published by the Free Software Foundation, either version 3 of the
+License, or (at your option) any later version.
 
-btrfs-diff-sh is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
+`btrfs-diff-sh` is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+General Public License for more details.
 
-You should have received a copy of the GNU General Public License
-along with btrfs-diff-sh. If not, see
-<[https://www.gnu.org/licenses/](https://www.gnu.org/licenses/)>.
+You should have received a copy of the GNU General Public License along with btrfs-diff-sh. If not,
+see [https://www.gnu.org/licenses/](https://www.gnu.org/licenses/).
+
+
+
+## Code of conduct
+
+Please note that this project is released with a *Contributor Code of Conduct*. By participating in
+this project you agree to abide by its terms.
