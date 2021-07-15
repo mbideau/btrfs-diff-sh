@@ -1,8 +1,8 @@
 # btrfs-diff-sh
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0)
-![Build](https://github.com/mbideau/btrfs-diff-sh/workflows/build/badge.svg)
-![Shellcheck](https://github.com/mbideau/btrfs-diff-sh/workflows/Shellcheck/badge.svg)
+[![build](https://github.com/mbideau/btrfs-diff-sh/actions/workflows/build.yml/badge.svg)](https://github.com/mbideau/btrfs-diff-sh/actions/workflows/build.yml)
+[![Shellcheck](https://github.com/mbideau/btrfs-diff-sh/actions/workflows/shellcheck.yml/badge.svg)](https://github.com/mbideau/btrfs-diff-sh/actions/workflows/shellcheck.yml)
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg)](CODE_OF_CONDUCT.md)
 
 Analyze differences between two BTRFS snapshots (like
