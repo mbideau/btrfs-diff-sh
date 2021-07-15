@@ -1,12 +1,19 @@
 # btrfs-diff-sh
 
-[![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0)
-[![build](https://github.com/mbideau/btrfs-diff-sh/actions/workflows/build.yml/badge.svg)](https://github.com/mbideau/btrfs-diff-sh/actions/workflows/build.yml)
-[![Shellcheck](https://github.com/mbideau/btrfs-diff-sh/actions/workflows/shellcheck.yml/badge.svg)](https://github.com/mbideau/btrfs-diff-sh/actions/workflows/shellcheck.yml)
-[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg)](CODE_OF_CONDUCT.md)
-
 Analyze differences between two BTRFS snapshots (like
 [GNU diff](https://www.gnu.org/software/diffutils/manual/) for directories).
+
+It is a single file *POSIX* shell script of ~ 570 lines of code (without blanks and comments).
+
+![Release](https://img.shields.io/github/v/release/mbideau/btrfs-diff-sh)
+![Release Date](https://img.shields.io/github/release-date/mbideau/btrfs-diff-sh)  
+[![Build](https://github.com/mbideau/btrfs-diff-sh/actions/workflows/build.yml/badge.svg)](https://github.com/mbideau/btrfs-diff-sh/actions/workflows/build.yml)
+[![Shellcheck](https://github.com/mbideau/btrfs-diff-sh/actions/workflows/shellcheck.yml/badge.svg)](https://github.com/mbideau/btrfs-diff-sh/actions/workflows/shellcheck.yml)
+![Shell POSIX](https://img.shields.io/badge/shell-POSIX-darkgreen)  
+[![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0)
+[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg)](CODE_OF_CONDUCT.md)
+[![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
+
 
 ## USAGE
 
@@ -102,7 +109,7 @@ REPORTING BUGS
 
 COPYRIGHT
 
-    Copyright (©) 2020-2021 Michael Bideau.
+    Copyright © 2020-2021 Michael Bideau.
     License GPLv3+: GNU GPL version 3 or later <https://gnu.org/licenses/gpl.html>
     This is free software: you are free to change and redistribute it.
     There is NO WARRANTY, to the extent permitted by law.
@@ -360,15 +367,15 @@ If you want a clean tarball of the sources, you can run :
 
 ## Copyright and License GPLv3
 
-Copyright (©) 2020-2021 Michael Bideau [France]
+Copyright © 2020-2021 Michael Bideau [France]
 
-This file is part of `btrfs-diff-sh`.
+This file is part of *btrfs-diff-sh*.
 
-`btrfs-diff-sh` is free software: you can redistribute it and/or modify it under the terms of the GNU
+*btrfs-diff-sh* is free software: you can redistribute it and/or modify it under the terms of the GNU
 General Public License as published by the Free Software Foundation, either version 3 of the
 License, or (at your option) any later version.
 
-`btrfs-diff-sh` is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+*btrfs-diff-sh* is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
 even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
 General Public License for more details.
 
