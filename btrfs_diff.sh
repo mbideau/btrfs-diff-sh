@@ -252,7 +252,7 @@ usage_version()
     _year="$(date '+%Y')"
     cat <<ENDCAT
 $PROGRAM_NAME $VERSION
-Copyright (C) 2020$([ "$_year" = '2020' ] || echo "-$_year") $AUTHOR.
+Copyright C 2020$([ "$_year" = '2020' ] || echo "-$_year") $AUTHOR.
 $(__ "License %s: %s <%s>" 'GPLv3+' 'GNU GPL version 3 or later' 'https://gnu.org/licenses/gpl.html')
 $(__ "This is free software: you are free to change and redistribute it.")
 $(__ "There is NO WARRANTY, to the extent permitted by law.")
