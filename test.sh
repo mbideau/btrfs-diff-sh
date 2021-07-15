@@ -77,6 +77,10 @@ __debug()
     fi
 }
 
+escape_eval()
+{
+    echo "$1" | sed -e 's/\\/\\\\/g' -e 's/\([]$*^?&`|("'"'"')[]\)/\\\1/g'
+}
 
 # shunit2 functions
 
@@ -153,6 +157,7 @@ test__lotsOfOperationsAndDiffAnalysis()
     ln bar/baz_file bar/baaz_file
     mv bar/baz_file bar/foo_file
     rm bar/foo_file
+    echo super_ugly_filename > cec]i[est-une\`hor#rible|ch.enne&de@charactère}q{ui~\$'assume)d(epuis*longtemps\sinon+voir^encore?.txt
     rm -rf bar
     mkdir dir
     touch dir/file
@@ -165,10 +170,10 @@ test__lotsOfOperationsAndDiffAnalysis()
     echo todel > dir/file_to_del
     rm -rf dir
 ENDCAT
-} | while read -r command; do
+} | grep -v '^\s*#' | while read -r command; do
         __debug '%d: %s\n' "$I" "$command"
         cd "$DATA_DIR"
-        eval "$command"
+        eval "$(escape_eval "$command")"
         cd - >/dev/null
         btrfs subvolume snapshot -r "$DATA_DIR" "$SNAPS_DIR/$(printf "%03i" $I)" > /dev/null
         I="$((I + 1))"

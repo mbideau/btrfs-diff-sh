@@ -118,12 +118,20 @@ debug()
     fi
 }
 
+# escape a 'grep' or a 'sed' pattern
+# @param  $1  string  the pattern to escape
+escape_pattern()
+{
+    # shellcheck disable=SC1003
+    echo "$1" | sed 's/\([].$*^\\[]\)/\\\1/g'
+}
+
 # get the path relative to the compared snapshot directory
-# @param  $1         string   the absolute path of the snapshot
+# @param  $1        string   the absolute path of the snapshot
 # @env    $cmp_dir  string   the path to the compared snapshot directory
 rel_path()
 {
-    echo "$1" | sed "s|^\./$cmp_dir||"
+    echo "$1" | sed "s|^\./$(escape_pattern "$cmp_dir" | sed 's/|/\\|/g')||"
 }
 
 # return 0 is the specified name match format: '^o[0-9]\+-[0-9]\+-[0-9]\+$'
@@ -378,7 +386,7 @@ while read -r line; do
 
     debug "${_ind}path: '%s'\n" "$path"
 
-    if grep -q "^$parent\$" "$_newdirs_buffer"; then
+    if grep -q "^$(escape_pattern "$parent")\$" "$_newdirs_buffer"; then
         debug "${_ind}ignoring (inside new dir '%s')\n" "$parent"
         continue
     fi
@@ -418,7 +426,7 @@ while read -r line; do
 
             # from a real thing to an object
             elif is_temp_object "$_dst_fn"; then
-                if ! grep -q "^[^|]\\+|$_dst|" "$_objects_buffer"; then
+                if ! grep -q "^[^|]\\+|$(escape_pattern "$_dst")|" "$_objects_buffer"; then
                     __ "Fatal error: when symlinking '%s' to '%s', the destination wasn't found in the objects buffer" \
                             "$path" "$_dst" >&2
                     exit 3
@@ -448,8 +456,8 @@ while read -r line; do
 
             # from object to real thing
             if is_temp_object "$fn"; then
-                if ! _match="$(grep "^[^|]\\+|$path|" "$_objects_buffer")"; then
-                    if ! _match="$(grep "^[^|]\\+|[^|]\+|[^|]\+|$path|" "$_objects_buffer")"; then
+                if ! _match="$(grep "^[^|]\\+|$(escape_pattern "$path")|" "$_objects_buffer")"; then
+                    if ! _match="$(grep "^[^|]\\+|[^|]\+|[^|]\+|$(escape_pattern "$path")|" "$_objects_buffer")"; then
                         __ "Fatal error: when renaming '%s' to '%s', the source wasn't found in the objects buffer" \
                                 "$path" "$_dst" >&2
                         exit 3
@@ -473,7 +481,7 @@ while read -r line; do
                 _dst_dir="$(dirname "$_dst")"
                 _dst_dir_fn="$(basename "$_dst_dir")"
                 if is_temp_object "$_dst_dir_fn"; then
-                    if ! grep -q "^[^|]\\+|$_dst_dir|" "$_objects_buffer"; then
+                    if ! grep -q "^[^|]\\+|$(escape_pattern "$_dst_dir")|" "$_objects_buffer"; then
                         __ "Fatal error: when renaming '%s' to '%s', the destination dir '%s' wasn't found "`
                             `"in the objects buffer" \
                                 "$path" "$_dst" "$_dst_dir" >&2
@@ -487,7 +495,7 @@ while read -r line; do
                     debug "${_ind}in real dir '%s'\n" "$_dst_dir"
 
                     # in a new dir
-                    if grep -q "^$_dst_dir\$" "$_newdirs_buffer"; then
+                    if grep -q "^$(escape_pattern "$_dst_dir")\$" "$_newdirs_buffer"; then
                         debug "${_ind}in a new dir\n"
                         debug "${_ind}ignored\n"
 
@@ -496,7 +504,7 @@ while read -r line; do
 
                         # if there is the same destination that was previously converted into an object
                         # it means this is a file that is being replaced by another one, i.e.: changed
-                        if grep -q "^[^|]\\+|$_dst|" "$_objects_buffer"; then
+                        if grep -q "^[^|]\\+|$(escape_pattern "$_dst")|" "$_objects_buffer"; then
                             debug "${_ind}destination '%s' found in object buffer\n" "$_dst"
                             debug "${_ind}which means this is a changed file (not and addition)\n"
 
@@ -546,14 +554,14 @@ while read -r line; do
                 debug "${_ind}extends an object\n"
 
                 # rename should have happened before, hence the search on the path/source
-                if ! grep -q "^[^|]\\+|$path|" "$_objects_buffer"; then
+                if ! grep -q "^[^|]\\+|$(escape_pattern "$path")|" "$_objects_buffer"; then
                     __ "Fatal error: when extending '%s', it wasn't found in the objects buffer" "$path" >&2
                     exit 3
                 fi
                 debug "${_ind}ignored\n"
 
             # extent on a new file or a changed file
-            elif grep -q "^$path\$" "$_newfiles_buffer"; then
+            elif grep -q "^$(escape_pattern "$path")\$" "$_newfiles_buffer"; then
                 debug "${_ind}extent on a new/changed file\n"
                 debug "${_ind}ignored (created by the renaming)\n"
 
@@ -573,14 +581,14 @@ while read -r line; do
                 debug "${_ind}clones an object\n"
 
                 # rename should have happened before, hence the search on the path/source
-                if ! grep -q "^[^|]\\+|$path|" "$_objects_buffer"; then
+                if ! grep -q "^[^|]\\+|$(escape_pattern "$path")|" "$_objects_buffer"; then
                     __ "Fatal error: when cloning '%s', it wasn't found in the objects buffer" "$path" >&2
                     exit 3
                 fi
                 debug "${_ind}ignored\n"
 
             # cloning on a new file or a changed file
-            elif grep -q "^$path\$" "$_newfiles_buffer"; then
+            elif grep -q "^$(escape_pattern "$path")\$" "$_newfiles_buffer"; then
                 debug "${_ind}clone on a new/changed file\n"
                 debug "${_ind}ignored (created by the renaming)\n"
 
@@ -598,19 +606,19 @@ while read -r line; do
                 debug "${_ind}truncate an object\n"
 
                 # rename should have happened before, hence the search on the path/source
-                if ! grep -q "^[^|]\\+|$path|" "$_objects_buffer"; then
+                if ! grep -q "^[^|]\\+|$(escape_pattern "$path")|" "$_objects_buffer"; then
                     __ "Fatal error: when truncating '%s', it wasn't found in the objects buffer" "$path" >&2
                     exit 3
                 fi
                 debug "${_ind}ignored\n"
 
             # truncate on a new file or a changed file
-            elif grep -q "^$path\$" "$_newfiles_buffer"; then
+            elif grep -q "^$(escape_pattern "$path")\$" "$_newfiles_buffer"; then
                 debug "${_ind}truncate on a new/changed file\n"
                 debug "${_ind}ignored\n"
 
             # truncate on a recently extended file
-            elif grep -q "^$path\$" "$_extfiles_buffer"; then
+            elif grep -q "^$(escape_pattern "$path")\$" "$_extfiles_buffer"; then
                 debug "${_ind}truncate on a recently extended file\n"
                 debug "${_ind}ignored\n"
 
@@ -635,7 +643,7 @@ while read -r line; do
             if is_temp_object "$fn"; then
 
                 # searching for the destination of a previous rename
-                if ! _match="$(grep "^[^|]\\+|[^|]\+|[^|]\+|$path|" "$_objects_buffer")"; then
+                if ! _match="$(grep "^[^|]\\+|[^|]\+|[^|]\+|$(escape_pattern "$path")|" "$_objects_buffer")"; then
                     __ "Fatal error: when deleting '%s', it wasn't found in the objects buffer" "$path" >&2
                     exit 3
                 fi
@@ -644,7 +652,7 @@ while read -r line; do
                     "$path" "$real_path"
 
                 # if the file is a changed one
-                if grep -q "^$real_path\$" "$_newfiles_buffer"; then
+                if grep -q "^$(escape_pattern "$real_path")\$" "$_newfiles_buffer"; then
                     debug "${_ind}found '%s' in the new files buffer\n" "$real_path"
                     debug "${_ind}which means it is actually a changed file, so ignoring the deletion\n"
 
@@ -659,7 +667,7 @@ while read -r line; do
             elif is_temp_object "$parent_fn"; then
 
                 # searching for the destination of a previous rename
-                if ! _match="$(grep "^[^|]\\+|[^|]\+|[^|]\+|$parent|" "$_objects_buffer")"; then
+                if ! _match="$(grep "^[^|]\\+|[^|]\+|[^|]\+|$(escape_pattern "$parent")|" "$_objects_buffer")"; then
                     __ "Fatal error: when deleting '%s', it wasn't found in the objects buffer" "$path" >&2
                     exit 3
                 fi
@@ -725,7 +733,7 @@ then
 
     while read -r _dir; do
         rel_dir="$(rel_path "$_dir")"
-        while _match="$(grep -n "^ *\\w\\+: $rel_dir/" "$_out")"; do
+        while _match="$(grep -n "^ *\\w\\+: $(escape_pattern "$rel_dir")/" "$_out")"; do
             debug "${_ind}removing line: '%s'\n" "$(echo "$_match" | sed 's/^[0-9]\+: //')"
             line_num="$(echo "$_match" | awk -F ':' '{print $1}')"
             sed -e "${line_num}d" -i "$_out"
@@ -744,8 +752,8 @@ then
     while read -r _file; do
         rel_file="$(rel_path "$_file")"
         debug "${_ind}processing file '%s' (%s)\n" "$_file" "$rel_file"
-        while _match_add="$(grep -n "^$op_added: $rel_file\$" "$_out")" && \
-                _match_del="$(grep -n "^$op_deleted: $rel_file\$" "$_out")"
+        while _match_add="$(grep -n "^$op_added: $(escape_pattern "$rel_file")\$" "$_out")" && \
+                _match_del="$(grep -n "^$op_deleted: $(escape_pattern "$rel_file")\$" "$_out")"
         do
             line_num_del="$(echo "$_match_del" | awk -F ':' '{print $1}')"
             line_num_add="$(echo "$_match_add" | awk -F ':' '{print $1}')"
@@ -804,7 +812,8 @@ if [ "$opt_compare_to_std_diff" = 'true' ] && [ "$opt_file" != 'true' ]; then
         _out_normalized="${_out_untranslated}.normalized"
         sed -e 's/^[ 	]*//g' "$_out_untranslated" -e '/^\(times\|prop\):/d' | sort > "$_out_normalized" || true
         _std_diff_out_normalized="${_std_diff_out}.normalized"
-        sed -e "s|$_snap_ref|old|" -e "s|$_snap_cmp|new|g" -e 's|: |/|' \
+        sed -e "s|$(escape_pattern "$_snap_ref" | sed 's/|/\\|/g')|old|" \
+            -e "s|$(escape_pattern "$_snap_cmp" | sed 's/|/\\|/g')|new|g" -e 's|: |/|' \
             -e 's/Only in new/added: /' -e 's/Only in old/deleted: /' \
             -e 's|Files old/.* and new/\(.*\) differ|changed: /\1|' \
             -e '/File .* is a fifo while file .* is a fifo/d' "$_std_diff_out" | sort > "$_std_diff_out_normalized"
