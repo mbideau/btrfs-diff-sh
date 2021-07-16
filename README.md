@@ -352,7 +352,7 @@ NOTE: if you install *shunit2* in the .tmp directory, it will be deleted when do
 Then you can run the following command:  
 
 ```sh
-~> SHUNIT2=.shunit2 make test
+~> SHUNIT2=.shunit2/shunit2 make test
 ```
 
 
