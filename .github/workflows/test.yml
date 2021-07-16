@@ -29,7 +29,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           repository: kward/shunit2
-        path: shunit2
+          path: shunit2
 
       # Install required packages dependencies
       - name: Install required packages dependencies
