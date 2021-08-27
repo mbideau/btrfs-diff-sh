@@ -359,13 +359,19 @@ if [ "$opt_file" != 'true' ]; then
         debug "Using sudo\\n"
     fi
 
+    # quiet option of btrfs receive only appeared in version 5.1
+    btrfs_receive_quiet_opt=quiet
+    if [ "$(btrfs --version | awk '{print $2}' | cut -c 2)" -lt 5 ]; then
+        btrfs_receive_quiet_opt=
+    fi
+
     # get a raw diff with the BTRFS tools
     debug "Running command: %s | %s > '%s'\\n" \
         "$use_sudo btrfs send --quiet --no-data -p '$_snap_ref' '$_snap_cmp'" \
-        "$use_sudo btrfs receive --quiet --dump" \
+        "$use_sudo btrfs receive $btrfs_receive_quiet_opt --dump" \
 	"$_raw_diff"
     if ! $use_sudo btrfs send --quiet --no-data -p "$_snap_ref" "$_snap_cmp" \
-        | $use_sudo btrfs receive --quiet --dump \
+        | $use_sudo btrfs receive $btrfs_receive_quiet_opt --dump \
         >"$_raw_diff"
     then
         __ "Fatal error: failed to get a raw diff with send/received for snapshots '%s' and '%s'" \
