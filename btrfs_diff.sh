@@ -118,6 +118,20 @@ debug()
     fi
 }
 
+# return 0 if the path is a subvolume
+# @from: https://stackoverflow.com/a/25908150
+is_btrfs_subvolume()
+{
+    case "$(stat -f -c "%T" "$1")" in
+       btrfs|UNKNOWN) ;;
+       *) return 1 ;;
+    esac
+    case "$(stat -c "%i" "$1")" in
+        2|256) return 0 ;;
+        *) return 1 ;;
+    esac
+}
+
 # escape a 'grep' or a 'sed' pattern
 # @param  $1  string  the pattern to escape
 escape_pattern()
@@ -329,6 +343,14 @@ if [ "$opt_file" != 'true' ]; then
     [ "$_snap_ref" != "$_snap_cmp" ] || exit 0
 
     _raw_diff="$_tmp_dir"/raw_diff.txt
+
+    # ensure arguments are BTRFS subvolumes
+    if ! is_btrfs_subvolume "$_snap_ref"; then
+        __ "Fatal error: '%s' is not a btrfs subvolume" "$_snap_ref" && exit 3
+    fi
+    if ! is_btrfs_subvolume "$_snap_cmp"; then
+        __ "Fatal error: '%s' is not a btrfs subvolume" "$_snap_cmp" && exit 3
+    fi
 
     # get a raw diff with the BTRFS tools
     if ! btrfs send --quiet --no-data -p "$_snap_ref" "$_snap_cmp" \
