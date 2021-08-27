@@ -352,15 +352,25 @@ if [ "$opt_file" != 'true' ]; then
         __ "Fatal error: '%s' is not a btrfs subvolume" "$_snap_cmp" && exit 3
     fi
 
+    # needs root privileges to do this
+    use_sudo=
+    if [ "$(id -u || true)" != '0' ]; then
+        use_sudo=sudo
+        debug "Using sudo\\n"
+    fi
+
     # get a raw diff with the BTRFS tools
-    if ! btrfs send --quiet --no-data -p "$_snap_ref" "$_snap_cmp" \
-        | LC_ALL=C btrfs receive --quiet --dump \
+    debug "Running command: %s | %s > '%s'\\n" \
+        "$use_sudo btrfs send --quiet --no-data -p '$_snap_ref' '$_snap_cmp'" \
+        "$use_sudo btrfs receive --quiet --dump" \
+	"$_raw_diff"
+    if ! $use_sudo btrfs send --quiet --no-data -p "$_snap_ref" "$_snap_cmp" \
+        | $use_sudo btrfs receive --quiet --dump \
         >"$_raw_diff"
     then
         __ "Fatal error: failed to get a raw diff with send/received for snapshots '%s' and '%s'" \
             "$_snap_ref" "$_snap_cmp" && exit 3
     fi
-
 
 # using --file option
 else
