@@ -115,6 +115,9 @@ DIST_TARFLAGS      := --create --auto-compress --posix --mode=0755 --recursion -
                       --directory "$(DIST_DIR)" \
                       "$(DIST_DIRNAME)"
 
+# tests
+TEST_SCRIPT        := $(srcdir)/test.sh
+
 # Debian packaging
 DEBEMAIL           ?= $(EMAIL_SUPPORT)
 DEBFULLNAME        ?= $(AUTHOR_NAME)
@@ -323,13 +326,13 @@ clean:
 test: $(TMPDIR)
 	@[ -e "$(SHUNIT2)" ] || { echo "shunit2 ($(SHUNIT2)) not found" && exit 3; }
 	@echo "## Running test ..."
-	@TMPDIR="$(TMPDIR)" SHUNIT2="$(SHUNIT2)" sh $(srcdir)/test.sh
+	@TMPDIR="$(TMPDIR)" SHUNIT2="$(SHUNIT2)" $(SHELL) $(TEST_SCRIPT)
 
 
 # shellcheck
 shellcheck:
 	@echo "## Checking shell errors and POSIX compatibility"
-	@for s in $(MAIN_SCRIPT); do \
+	@for s in $(MAIN_SCRIPT) $(TEST_SCRIPT); do \
 	    echo "  $$s"; \
 	    _extra_args=''; \
 	    $(SHELLCHECK) $(SHELLCHECKFLAGS) $(SHELLCHECKFLAGS_ALL) $$_extra_args "$$s"; \
