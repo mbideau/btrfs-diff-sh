@@ -370,7 +370,8 @@ if [ "$opt_file" != 'true' ]; then
     debug "Running command: %s | %s > '%s'\\n" \
         "$use_sudo btrfs send --quiet --no-data -p '$_snap_ref' '$_snap_cmp'" \
         "$use_sudo btrfs receive $btrfs_receive_quiet_opt --dump" \
-	"$_raw_diff"
+        "$_raw_diff"
+    # shellcheck disable=SC2086
     if ! $use_sudo btrfs send --quiet --no-data -p "$_snap_ref" "$_snap_cmp" \
         | $use_sudo btrfs receive $btrfs_receive_quiet_opt --dump \
         >"$_raw_diff"
