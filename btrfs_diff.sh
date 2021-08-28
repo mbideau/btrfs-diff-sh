@@ -361,7 +361,7 @@ if [ "$opt_file" != 'true' ]; then
     fi
 
     # quiet option of btrfs receive only appeared in version 5.1
-    btrfs_receive_quiet_opt=quiet
+    btrfs_receive_quiet_opt='--quiet'
     if [ "$(btrfs --version | awk '{print $2}' | cut -c 2)" -lt 5 ]; then
         btrfs_receive_quiet_opt=
     fi
