@@ -641,7 +641,7 @@ while read -r line; do
 
         truncate)
 
-            # truncate an object : do not exist ?
+            # truncate an object
             if is_temp_object "$fn"; then
                 debug "${_ind}truncate an object\\n"
 
