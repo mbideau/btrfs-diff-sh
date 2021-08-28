@@ -736,6 +736,36 @@ while read -r line; do
             fi
             ;;
 
+        write)
+
+            # write an object
+            if is_temp_object "$fn"; then
+                debug "${_ind}write an object\\n"
+
+                # rename should have happened before, hence the search on the path/source
+                if ! grep -q "^[^|]\\+|$(escape_pattern "$path")|" "$_objects_buffer"; then
+                    __ "Fatal error: when truncating '%s', it wasn't found in the objects buffer" "$path" >&2
+                    exit 3
+                fi
+                debug "${_ind}ignored\\n"
+
+            # write on a new file or a changed file
+            elif grep -q "^$(escape_pattern "$path")\$" "$_newfiles_buffer"; then
+                debug "${_ind}write on a new/changed file\\n"
+                debug "${_ind}ignored\\n"
+
+            # write on a recently extended file
+            elif grep -q "^$(escape_pattern "$path")\$" "$_extfiles_buffer"; then
+                debug "${_ind}write on a recently extended file\\n"
+                debug "${_ind}ignored\\n"
+
+            # regular write
+            else
+                debug ">>> %s: '%s'\\n" "$op_changed" "$rel_path"
+                echo "$op_changed: $rel_path" >> "$_out"
+            fi
+            ;;
+
         utimes)
             if [ "$opt_with_times" = 'true' ]; then
                 debug ">>> %s: '%s'\\n" "$op_times" "$rel_path"
