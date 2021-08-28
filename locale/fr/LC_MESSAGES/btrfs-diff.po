@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.0.1\n"
 "Report-Msgid-Bugs-To: mica.devel@gmail.com\n"
-"POT-Creation-Date: 2021-07-16 01:22+0200\n"
+"POT-Creation-Date: 2021-08-28 20:41+0200\n"
 "PO-Revision-Date: 2020-12-12\n"
 "Last-Translator: Michael Bideau <mica.devel@gmail.com> [France]\n"
 "Language-Team: none\n"
@@ -12,67 +12,71 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: btrfs_diff.sh:354
+#: btrfs_diff.sh:394
 msgid "  added"
 msgstr "  ajouté"
 
-#: btrfs_diff.sh:358
+#: btrfs_diff.sh:398
 msgid "  props"
 msgstr "   props"
 
-#: btrfs_diff.sh:359
+#: btrfs_diff.sh:399
 msgid "  times"
 msgstr "   temps"
 
-#: btrfs_diff.sh:171
+#: btrfs_diff.sh:185
 msgid "A file containing the output of the command '%s'."
 msgstr "Un fichier contenant l'affichage de la commande '%s'."
 
-#: btrfs_diff.sh:160
+#: btrfs_diff.sh:174
 msgid "ARGUMENTS"
 msgstr "ARGUMENTS"
 
-#: btrfs_diff.sh:227
+#: btrfs_diff.sh:241
 msgid "AUTHORS"
 msgstr "AUTEURS"
 
-#: btrfs_diff.sh:237
+#: btrfs_diff.sh:251
 msgid "COPYRIGHT"
 msgstr "COPYRIGHT"
 
-#: btrfs_diff.sh:178
+#: btrfs_diff.sh:192
 msgid "Compare the result against the output of the standard '%s' utility."
 msgstr "Comparer le résultat avec l'affichage de l'utilitaire standard '%s'."
 
-#: btrfs_diff.sh:842
+#: btrfs_diff.sh:912
 msgid "Comparison with standard '%s' utility :"
 msgstr "Comparaison avec l'utilitaire standard '%s':"
 
-#: btrfs_diff.sh:205
+#: btrfs_diff.sh:219
 msgid "Create the dump of the send/receive between two snapshots."
 msgstr "Créé le dump de l'envoi/réception entre les deux snapshots."
 
-#: btrfs_diff.sh:154 btrfs_diff.sh:170
+#: btrfs_diff.sh:168 btrfs_diff.sh:184
 msgid "DUMP_FILE"
 msgstr "FIC_DUMP"
 
-#: btrfs_diff.sh:192
+#: btrfs_diff.sh:206
 msgid "Display help message."
 msgstr "Afficher le message d'aide."
 
-#: btrfs_diff.sh:195
+#: btrfs_diff.sh:209
 msgid "Display version and license informations."
 msgstr "Afficher les informations de version et de licence."
 
-#: btrfs_diff.sh:214
+#: btrfs_diff.sh:228
 msgid "ENVIRONMENT"
 msgstr "ENVIRONNEMENT"
 
-#: btrfs_diff.sh:198
+#: btrfs_diff.sh:212
 msgid "EXAMPLES"
 msgstr "EXEMPLES"
 
-#: btrfs_diff.sh:338
+#: btrfs_diff.sh:350 btrfs_diff.sh:353
+msgid "Fatal error: '%s' is not a btrfs subvolume"
+msgstr "Erreur fatale: '%s' n'est pas un sous-volume btrfs"
+
+#: btrfs_diff.sh:379
 msgid ""
 "Fatal error: failed to get a raw diff with send/received for snapshots '%s' "
 "and '%s'"
@@ -80,39 +84,39 @@ msgstr ""
 "Erreur fatale: échec de la production du diff 'brut' avec l'envoi/réception "
 "pour les snapshots '%s' et '%s'"
 
-#: btrfs_diff.sh:270
+#: btrfs_diff.sh:285
 msgid "Fatal error: invalid option"
 msgstr "Erreur fatale: option invalide."
 
-#: btrfs_diff.sh:348
+#: btrfs_diff.sh:388
 msgid "Fatal error: the file '%s' doesn't exist or is not readable"
 msgstr "Erreur fatale: le fichier '%s' n'existe pas ou n'est pas lisible"
 
-#: btrfs_diff.sh:585
+#: btrfs_diff.sh:625
 msgid "Fatal error: when cloning '%s', it wasn't found in the objects buffer"
 msgstr ""
 "Erreur fatale: lors du clonage de '%s', introuvable dans le tampon des objets"
 
-#: btrfs_diff.sh:647 btrfs_diff.sh:671
+#: btrfs_diff.sh:687 btrfs_diff.sh:711
 msgid "Fatal error: when deleting '%s', it wasn't found in the objects buffer"
 msgstr ""
 "Erreur fatale: lors de la suppression de '%s', introuvable dans le tampon "
 "des objets"
 
-#: btrfs_diff.sh:558
+#: btrfs_diff.sh:598
 msgid "Fatal error: when extending '%s', it wasn't found in the objects buffer"
 msgstr ""
 "Erreur fatale: lors de l'extension de '%s', introuvable dans le tampon des "
 "objets"
 
-#: btrfs_diff.sh:473
+#: btrfs_diff.sh:513
 msgid ""
 "Fatal error: when renaming '%s' to '%s', the operation '%s' found is invalid"
 msgstr ""
 "Erreur fatale: lors du renommage de '%s' en '%s', l'opération '%s' trouvée "
 "est invalide"
 
-#: btrfs_diff.sh:461
+#: btrfs_diff.sh:501
 msgid ""
 "Fatal error: when renaming '%s' to '%s', the source wasn't found in the "
 "objects buffer"
@@ -120,7 +124,7 @@ msgstr ""
 "Erreur fatale: lors du renommage de '%s' en '%s', la source était "
 "introuvable dans le tampon des objets"
 
-#: btrfs_diff.sh:430
+#: btrfs_diff.sh:470
 msgid ""
 "Fatal error: when symlinking '%s' to '%s', the destination wasn't found in "
 "the objects buffer"
@@ -128,26 +132,26 @@ msgstr ""
 "Erreur fatale: lors du renommage de '%s' en '%s', la destination était "
 "introuvable dans le tampon des objets"
 
-#: btrfs_diff.sh:610
+#: btrfs_diff.sh:650 btrfs_diff.sh:747
 msgid ""
 "Fatal error: when truncating '%s', it wasn't found in the objects buffer"
 msgstr ""
 "Erreur fatale: lors du tronquage de '%s', introuvable dans le tampon des "
 "objets"
 
-#: btrfs_diff.sh:200 btrfs_diff.sh:210
+#: btrfs_diff.sh:214 btrfs_diff.sh:224
 msgid "Get the differences between two snapshots."
 msgstr "Analyse les différences entre deux snapshots."
 
-#: btrfs_diff.sh:244
+#: btrfs_diff.sh:258
 msgid "Home page"
 msgstr "Page d'accueil"
 
-#: btrfs_diff.sh:223
+#: btrfs_diff.sh:237
 msgid "Influence the translation."
 msgstr "Influence la traduction."
 
-#: btrfs_diff.sh:183
+#: btrfs_diff.sh:197
 msgid ""
 "Instead of two snapshots, use a file containing the %s output of the "
 "snapshots."
@@ -155,133 +159,133 @@ msgstr ""
 "Au lieu de deux snapshots, utilise un fichier contenant l'affichage de %s "
 "des snapshots."
 
-#: btrfs_diff.sh:168
+#: btrfs_diff.sh:182
 msgid "It must also be a read-only one."
 msgstr "Doit aussi être en lecture-seule."
 
-#: btrfs_diff.sh:164
+#: btrfs_diff.sh:178
 msgid "It must be a read-only one."
 msgstr "Doit être en lecture-seule."
 
-#: btrfs_diff.sh:256
+#: btrfs_diff.sh:271
 msgid "License %s: %s <%s>"
 msgstr "Licence %s: %s <%s>"
 
-#: btrfs_diff.sh:840
+#: btrfs_diff.sh:910
 msgid "Note: same output as with the standard '%s' utility"
 msgstr "Note: affichage identique à l'utilitaire standard '%s'"
 
-#: btrfs_diff.sh:175
+#: btrfs_diff.sh:189
 msgid "OPTIONS"
 msgstr "OPTIONS"
 
-#: btrfs_diff.sh:167
+#: btrfs_diff.sh:181
 msgid "Path to the compared snapshot."
 msgstr "Chemin vers le snapshot comparé."
 
-#: btrfs_diff.sh:163
+#: btrfs_diff.sh:177
 msgid "Path to the reference snapshot."
 msgstr "Chemin vers le snapshot de référence."
 
-#: btrfs_diff.sh:217
+#: btrfs_diff.sh:231
 msgid "Print debugging information to '%s' only if var %s='%s'."
 msgstr "Affiche des informations de déboguage sur '%s' seulement si %s='%s'."
 
-#: btrfs_diff.sh:803
+#: btrfs_diff.sh:873
 msgid ""
 "Producing a diff using standard '%s' utility ... (might takes a little time)"
 msgstr ""
 "Production des différences à l'aide de l'utilitaire standard '%s' ... (ça "
 "pourrait prendre un peu temps)"
 
-#: btrfs_diff.sh:232
+#: btrfs_diff.sh:246
 msgid "REPORTING BUGS"
 msgstr "RAPPORTER LES BOGUES"
 
-#: btrfs_diff.sh:234
+#: btrfs_diff.sh:248
 msgid "Report bugs to"
 msgstr "Rapporter les bogues à"
 
-#: btrfs_diff.sh:189
+#: btrfs_diff.sh:203
 msgid "Report properties differences %s"
 msgstr "Reporter les différences de propriétés %s."
 
-#: btrfs_diff.sh:186
+#: btrfs_diff.sh:200
 msgid "Report times differences %s"
 msgstr "Reporter les différences de temps %s"
 
-#: btrfs_diff.sh:242
+#: btrfs_diff.sh:256
 msgid "SEE ALSO"
 msgstr "VOIR AUSSI"
 
-#: btrfs_diff.sh:153 btrfs_diff.sh:166
+#: btrfs_diff.sh:167 btrfs_diff.sh:180
 msgid "SNAP_CMP"
 msgstr "SNAP_CMP"
 
-#: btrfs_diff.sh:153 btrfs_diff.sh:162
+#: btrfs_diff.sh:167 btrfs_diff.sh:176
 msgid "SNAP_REF"
 msgstr "SNAP_REF"
 
-#: btrfs_diff.sh:224
+#: btrfs_diff.sh:238
 msgid "See %s documentation."
 msgstr "Voir la documentation de %s."
 
-#: btrfs_diff.sh:258
+#: btrfs_diff.sh:273
 msgid "There is NO WARRANTY, to the extent permitted by law."
 msgstr "Il n'y aucune GARANTIE, dans la limite de ce que permet la loi."
 
-#: btrfs_diff.sh:257
+#: btrfs_diff.sh:272
 msgid "This is free software: you are free to change and redistribute it."
 msgstr ""
 "Ceci est un logiciel libre: vous être libre de le modifier et de le "
 "redistribuer."
 
-#: btrfs_diff.sh:180
+#: btrfs_diff.sh:194
 msgid "This option is ignored when the option '%s' is also specified."
 msgstr "Cette option est ignorée lorsque l'option '%s' est aussi spécifiée."
 
-#: btrfs_diff.sh:151
+#: btrfs_diff.sh:165
 msgid "USAGE"
 msgstr "USAGE"
 
-#: btrfs_diff.sh:854
+#: btrfs_diff.sh:924
 msgid "Warning: can't compare to standard '%s' utility (binary not found)"
 msgstr ""
 "Avertissement: impossible de comparer avec l'utilitaire standard "
 "'%s' (binaire non trouvé)"
 
-#: btrfs_diff.sh:850
+#: btrfs_diff.sh:920
 msgid "Warning: failed to collect the differences between the two results"
 msgstr ""
 "Avertissement: échec de la collecte des différences entre les deux résultats"
 
-#: btrfs_diff.sh:827
+#: btrfs_diff.sh:897
 msgid "Warning: failed to compare both diffs (using standard '%s')"
 msgstr ""
 "Avertissement: échec de la comparaison des différences (utilisant le '%s' "
 "standard)"
 
-#: btrfs_diff.sh:714
+#: btrfs_diff.sh:784
 msgid "Warning: unknown raw line '%s'"
 msgstr "Avertissement: ligne brute inconnue '%s'"
 
-#: btrfs_diff.sh:229
+#: btrfs_diff.sh:243
 msgid "Written by"
 msgstr "Écrit par"
 
-#: btrfs_diff.sh:356
+#: btrfs_diff.sh:396
 msgid "changed"
 msgstr "  changé"
 
-#: btrfs_diff.sh:355
+#: btrfs_diff.sh:395
 msgid "deleted"
 msgstr "supprimé"
 
-#: btrfs_diff.sh:149
+#: btrfs_diff.sh:163
 msgid "get differences between two BTRFS snapshots."
 msgstr "analyse les différences entre deux snapshots BTRFS."
 
-#: btrfs_diff.sh:357
+#: btrfs_diff.sh:397
 msgid "renamed"
 msgstr " renommé"
 
