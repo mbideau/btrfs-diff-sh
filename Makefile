@@ -72,9 +72,9 @@ dirs_var_name      := prefix exec_prefix bindir sbindir datarootdir datadir sysc
 
 # install
 INSTALL            ?= install
-INSTALL_PROGRAM    ?= $(INSTALL) $(INSTALLFLAGS) --mode 750
-INSTALL_DATA       ?= $(INSTALL) $(INSTALLFLAGS) --mode 640
-INSTALL_DIRECTORY  ?= $(INSTALL) $(INSTALLFLAGS) --directory --mode 750
+INSTALL_PROGRAM    ?= $(INSTALL) $(INSTALLFLAGS) --mode 755
+INSTALL_DATA       ?= $(INSTALL) $(INSTALLFLAGS) --mode 644
+INSTALL_DIRECTORY  ?= $(INSTALL) $(INSTALLFLAGS) --directory --mode 755
 
 # locale specific
 MAIL_BUGS_TO       := $(EMAIL_SUPPORT)
