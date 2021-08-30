@@ -126,9 +126,6 @@ setUp()
 
     __debug "Creating a directory that will contains the snapshots: '%s'\\n" "$SNAPS_DIR"
     [ ! -d "$SNAPS_DIR" ] && mkdir -p "$SNAPS_DIR"
-
-    __debug "Creating first snapshot (with no data) '%s'\\n" "$SNAPS_DIR"/000
-    btrfs subvolume snapshot -r "$DATA_DIR" "$SNAPS_DIR"/000 > /dev/null
 }
 
 tearDown()
@@ -156,6 +153,9 @@ tearDown()
 # inspired by: 'btrfs-send-go' tests cases
 test__lotsOfOperationsAndDiffAnalysis()
 {
+    __debug "Creating first snapshot (with no data) '%s'\\n" "$SNAPS_DIR"/000
+    btrfs subvolume snapshot -r "$DATA_DIR" "$SNAPS_DIR"/000 > /dev/null
+
     __debug "Creating data and snapshots for each commands\\n"
     I=1
     { cat <<ENDCAT
