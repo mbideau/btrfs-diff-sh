@@ -1,0 +1,40 @@
+snapshot        ./subv-snap1_2                  uuid=794f747f-dce9-b64e-9ac7-a06ae93924c0 transid=9 parent_uuid=b0afcb2c-91d5-2f42-b817-6e073b881952 parent_transid=12
+utimes          ./subv-snap1_2/                 atime=2016-11-09T01:07:00+0100 mtime=2016-11-09T01:07:00+0100 ctime=2016-11-09T01:07:00+0100
+unlink          ./subv-snap1_2/file2_1
+mkfile          ./subv-snap1_2/o257-8-0
+rename          ./subv-snap1_2/o257-8-0         dest=./subv-snap1_2/file1_1
+utimes          ./subv-snap1_2/                 atime=2016-11-09T01:07:00+0100 mtime=2016-11-09T01:07:00+0100 ctime=2016-11-09T01:07:00+0100
+clone           ./subv-snap1_2/file1_1          offset=0 len=1048576 from=./subv-snap1_2/file1_1 clone_offset=0
+truncate        ./subv-snap1_2/file1_1          size=1048576
+chown           ./subv-snap1_2/file1_1          gid=0 uid=0
+chmod           ./subv-snap1_2/file1_1          mode=644
+utimes          ./subv-snap1_2/file1_1          atime=2016-11-09T01:07:00+0100 mtime=2016-11-09T01:07:00+0100 ctime=2016-11-09T01:07:00+0100
+mkfile          ./subv-snap1_2/o258-9-0
+rename          ./subv-snap1_2/o258-9-0         dest=./subv-snap1_2/file1_2
+utimes          ./subv-snap1_2/                 atime=2016-11-09T01:07:00+0100 mtime=2016-11-09T01:07:00+0100 ctime=2016-11-09T01:07:00+0100
+write           ./subv-snap1_2/file1_2          offset=0 len=49152
+write           ./subv-snap1_2/file1_2          offset=49152 len=49152
+write           ./subv-snap1_2/file1_2          offset=98304 len=49152
+write           ./subv-snap1_2/file1_2          offset=147456 len=49152
+write           ./subv-snap1_2/file1_2          offset=196608 len=49152
+write           ./subv-snap1_2/file1_2          offset=245760 len=49152
+write           ./subv-snap1_2/file1_2          offset=294912 len=49152
+write           ./subv-snap1_2/file1_2          offset=344064 len=49152
+write           ./subv-snap1_2/file1_2          offset=393216 len=49152
+write           ./subv-snap1_2/file1_2          offset=442368 len=49152
+write           ./subv-snap1_2/file1_2          offset=491520 len=49152
+write           ./subv-snap1_2/file1_2          offset=540672 len=49152
+write           ./subv-snap1_2/file1_2          offset=589824 len=49152
+write           ./subv-snap1_2/file1_2          offset=638976 len=49152
+write           ./subv-snap1_2/file1_2          offset=688128 len=49152
+write           ./subv-snap1_2/file1_2          offset=737280 len=49152
+write           ./subv-snap1_2/file1_2          offset=786432 len=49152
+write           ./subv-snap1_2/file1_2          offset=835584 len=49152
+write           ./subv-snap1_2/file1_2          offset=884736 len=49152
+write           ./subv-snap1_2/file1_2          offset=933888 len=49152
+write           ./subv-snap1_2/file1_2          offset=983040 len=49152
+write           ./subv-snap1_2/file1_2          offset=1032192 len=16384
+truncate        ./subv-snap1_2/file1_2          size=1048576
+chown           ./subv-snap1_2/file1_2          gid=0 uid=0
+chmod           ./subv-snap1_2/file1_2          mode=644
+utimes          ./subv-snap1_2/file1_2          atime=2016-11-09T01:07:00+0100 mtime=2016-11-09T01:07:00+0100 ctime=2016-11-09T01:07:00+0100
