@@ -218,6 +218,22 @@ ENDCAT
     done
 }
 
+# from: https://git.kernel.org/pub/scm/linux/kernel/git/kdave/btrfs-progs.git/tree/tests/misc-tests/016-send-clone-src
+#       'multi-clone-src-v4.8.2.stream.xz' has been extracted and its file passed as the argument of
+#       $ btrfs receive -f 'multi-clone-src-v4.8.2.stream' --dump > test.stream
+#       to produce the 'test.stream' file used here
+test_trickyStream()
+{
+    _ret=0
+    LC_ALL=C $use_shell "$BTRFS_DIFF" --file "$THIS_DIR"/test.stream >/tmp/out.diff 2>/tmp/err.diff || _ret=$?
+    assertSame "1" "$_ret"
+    assertSame '' '' "$(cat /tmp/err.diff)"
+    assertSame 'operations' \
+"  added: /file1_1
+  added: /file1_2
+deleted: /file2_1" "$(cat /tmp/out.diff)"
+}
+
 # run shunit2
 # shellcheck disable=SC1090
 . "$SHUNIT2"
