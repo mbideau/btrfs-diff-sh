@@ -36,13 +36,17 @@
 # halt on first error
 set -e
 
+# use a shell to run the btrfs-diff
+use_shell=
+
 # 'btrfs-diff' root directory
 THIS_DIR="$(dirname "$(realpath "$0")")"
 
 if [ "$BTRFS_DIFF" = '' ]; then
     if ! BTRFS_DIFF="$(command -v btrfs-diff 2>/dev/null)"; then
-        if [ -x "$THIS_DIR/btrfs_diff.sh" ]; then
+        if [ -e "$THIS_DIR/btrfs_diff.sh" ]; then
             BTRFS_DIFF="$THIS_DIR/btrfs_diff.sh"
+            use_shell="$(command -v sh)"
         else
             echo "Fatal error: failed to find binary 'btrfs-diff'" >&2
             exit 1
@@ -198,7 +202,7 @@ ENDCAT
                 "$(echo "$B" | sed "s|$TEST_DIR/\\?||g")"
 
             # produce a diff using the 'btrfs-diff' binary
-            LC_ALL=C "$BTRFS_DIFF" -d "$A" "$B" >/tmp/out.diff 2>&1 || true
+            LC_ALL=C $use_shell "$BTRFS_DIFF" -d "$A" "$B" >/tmp/out.diff 2>&1 || true
             __debug "Result:\\n---\\n%s\\n---\\n" "$(cat /tmp/out.diff)"
 
             # diff the diffs between them and report differences
