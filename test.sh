@@ -134,11 +134,16 @@ setUp()
 tearDown()
 {
     __debug "Removing existing data and snapshots\\n"
-    [ ! -d "$DATA_DIR" ] || btrfs subvolume delete "$DATA_DIR" > /dev/null
+    use_sudo=
+    if [ "$(id -u)" != '0' ]; then
+        use_sudo=sudo
+    fi
+    [ ! -d "$DATA_DIR" ] || $use_sudo btrfs subvolume delete "$DATA_DIR" > /dev/null
     if [ -d "$SNAPS_DIR" ]; then
         if [ "$(ls "$SNAPS_DIR")" != '' ]; then
             for snap in "$SNAPS_DIR"/*; do
-                btrfs subvolume delete "$snap" > /dev/null
+                __debug "Removing snapshots '$snap'\\n"
+                $use_sudo btrfs subvolume delete "$snap" > /dev/null
             done
         fi
         rmdir "$SNAPS_DIR"
