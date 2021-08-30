@@ -234,6 +234,56 @@ test_trickyStream()
 deleted: /file2_1" "$(cat /tmp/out.diff)"
 }
 
+# # test the clone instruction
+# # inspired from: https://git.kernel.org/pub/scm/linux/kernel/git/kdave/btrfs-progs.git/tree/tests/misc-tests/039-receive-clone-from-current-subvolume/test.sh
+# test_cloneIntruction()
+# {
+#     __debug "Creating first snapshot (with no data) '%s'\\n" "$SNAPS_DIR"/data_empty
+#     btrfs subvolume snapshot -r "$DATA_DIR" "$SNAPS_DIR"/data_empty > /dev/null
+# 
+#     __debug "Creating a subvolume that will contains the data: '%s' (read-write)\\n" "$DATA_DIR/subvol"
+#     btrfs subvolume create "$DATA_DIR/subvol" > /dev/null
+# 
+#     __debug "Creating first subvol snapshot (with no data) '%s'\\n" "$SNAPS_DIR"/data_subvol_empty
+#     btrfs subvolume snapshot -r "$DATA_DIR/subvol" "$SNAPS_DIR"/data_subvol_empty > /dev/null
+# 
+#     __debug "Creating a file 'foo'\\n"
+#     echo 'foo content' > "$DATA_DIR/subvol/foo"
+#     __debug "RefLinking 'bar' to 'foo'\\n"
+#     cp --reflink=always "$DATA_DIR/subvol/foo" "$DATA_DIR/subvol/bar"
+# 
+#     __debug "Creating subvol snapshot after reflink '%s'\\n" "$SNAPS_DIR"/data_subvol_reflink
+#     btrfs subvolume snapshot -r "$DATA_DIR/subvol" "$SNAPS_DIR"/data_subvol_reflink > /dev/null
+# 
+#     __debug "Creating a directory 'dir'\\n"
+#     mkdir "$DATA_DIR/subvol/dir"
+#     __debug "Moving 'foo' into 'dir'\\n"
+#     mv "$DATA_DIR/subvol/foo" "$DATA_DIR/subvol/dir"/
+# 
+#     __debug "Creating second subvol snapshot '%s'\\n" "$SNAPS_DIR"/data_subvol_content
+#     btrfs subvolume snapshot -r "$DATA_DIR/subvol" "$SNAPS_DIR"/data_subvol_content > /dev/null
+# 
+#     __debug "Creating second snapshot '%s'\\n" "$SNAPS_DIR"/data_content
+#     btrfs subvolume snapshot -r "$DATA_DIR" "$SNAPS_DIR"/data_content > /dev/null
+# 
+#     __debug "Comparing before and after content\\n"
+#     DEBUG=btrfs-diff LC_ALL=C $use_shell "$BTRFS_DIFF" -d "$SNAPS_DIR/data_subvol_empty" "$SNAPS_DIR/data_subvol_content" >/tmp/out.diff 2>/tmp/err.diff || true
+#     __debug "Result:\\n---\\n%s\\n--- err\\n%s\\n---\\n" "$(cat /tmp/out.diff)" "$(cat /tmp/err.diff)"
+# 
+#     __debug "Set the data dir '$DATA_DIR/subvol' into read-only mode\\n"
+#     btrfs property set "$DATA_DIR/subvol" ro true
+# 
+#     __debug "Sending the data of data dir '$DATA_DIR/subvol' to file 'send.data'\\n"
+#     use_sudo=
+#     if [ "$(id -u)" != '0' ]; then
+#         use_sudo=sudo
+#     fi
+#     if ! $use_sudo btrfs send --quiet -f "$TEST_DIR/send.data" "$DATA_DIR/subvol"; then
+#         btrfs property set "$DATA_DIR" ro false
+#         return 1
+#     fi
+#     if [ "$use_sudo" != '' ]; then
+
 # run shunit2
 # shellcheck disable=SC1090
 . "$SHUNIT2"
