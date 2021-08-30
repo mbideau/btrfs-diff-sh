@@ -283,6 +283,46 @@ deleted: /file2_1" "$(cat /tmp/out.diff)"
 #         return 1
 #     fi
 #     if [ "$use_sudo" != '' ]; then
+#         $use_sudo chown "$USER:$USER" "$TEST_DIR/send.data"
+#         chmod ug=rw,o=r "$TEST_DIR/send.data"
+#     fi
+# 
+#     __debug "Set the data dir '$DATA_DIR/subvol' into read-write mode\\n"
+#     btrfs property set "$DATA_DIR/subvol" ro false
+# 
+#     __debug "Creating two directories that will further receive the subvolume data\\n"
+#     mkdir "$DATA_DIR/first" "$DATA_DIR/second"
+#     __debug "Receiving the subvolume data into both directories\\n"
+#     # quiet option of btrfs receive only appeared in version 5.1
+#     btrfs_receive_quiet_opt='--quiet'
+#     if [ "$(btrfs --version | awk '{print $2}' | cut -c 2)" -lt 5 ]; then
+#         btrfs_receive_quiet_opt=
+#     fi
+#     for d in first second; do
+#         # shellcheck disable=SC2086
+#         $use_sudo btrfs receive $btrfs_receive_quiet_opt -f "$TEST_DIR/send.data" "$DATA_DIR/$d" || return 1
+#         __debug "Creating snapshots after receiving subvolume data the $d time\\n"
+#         btrfs subvolume snapshot -r "$DATA_DIR" "$SNAPS_DIR/$d" > /dev/null || return 1
+#     done
+# 
+#     btrfs property set "$DATA_DIR" ro true
+#     $use_sudo btrfs send --no-data "$DATA_DIR" >/tmp/send.data
+#     btrfs property set "$DATA_DIR" ro false
+#     # shellcheck disable=SC2086
+#     $use_sudo btrfs receive -f /tmp/send.data --dump >/tmp/receive.data
+# 
+#     __debug "Comparing first and second snapshots\\n"
+#     DEBUG=btrfs-diff LC_ALL=C $use_shell "$BTRFS_DIFF" -d "$SNAPS_DIR/first" "$SNAPS_DIR/second" >/tmp/out.diff 2>/tmp/err.diff || true
+#     __debug "Result:\\n---\\n%s\\n--- err\\n%s\\n---\\n" "$(cat /tmp/out.diff)" "$(cat /tmp/err.diff)"
+# 
+#     __debug "Set the data dir 'subvol' of subvolumes into read-write mode\\n"
+#     for d in first second; do btrfs property set "$DATA_DIR/$d/subvol" ro false; done
+# 
+#     __debug "Cleanup\\n"
+#     rm -f "$TEST_DIR/send.data"
+#     $use_sudo btrfs subvolume delete "$DATA_DIR/subvol" > /dev/null
+#     for d in first second; do $use_sudo btrfs subvolume delete "$DATA_DIR/$d/subvol" > /dev/null; done
+# }
 
 # run shunit2
 # shellcheck disable=SC1090
