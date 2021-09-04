@@ -69,6 +69,7 @@ fi
 if [ "$TMPDIR" = '' ]; then
     TMPDIR="$THIS_DIR"/.tmp
 fi
+remove_test_dir=false
 if [ "$TEST_DIR" = '' ]; then
     TEST_DIR="$THIS_DIR"/testdir
 fi
@@ -80,11 +81,6 @@ if [ "$(id -u)" != '0' ]; then
     echo "Using sudo"
     use_sudo=sudo
 fi
-
-echo "Test directory: '$TEST_DIR'"
-[ ! -d "$TEST_DIR" ] && mkdir -p "$TEST_DIR"
-$use_sudo chown "$USER" "$TEST_DIR"
-$use_sudo chmod u=rwx "$TEST_DIR"
 
 echo "Tmp directory: '$TMPDIR'"
 [ ! -d "$TMPDIR" ] && mkdir -p "$TMPDIR"
@@ -121,6 +117,9 @@ oneTimeSetUp()
     if [ ! -d "$TEST_DIR" ]; then
         __debug "Creating directory: '%s'\\n" "$TEST_DIR"
         mkdir "$TEST_DIR"
+        $use_sudo chown "$USER" "$TEST_DIR"
+        $use_sudo chmod u=rwx "$TEST_DIR"
+        remove_test_dir=true
     fi
 
     # remove exiting files
@@ -132,7 +131,7 @@ oneTimeSetUp()
 oneTimeTearDown()
 {
     # remove the tests dir
-    if [ -d "$TEST_DIR" ]; then
+    if [ -d "$TEST_DIR" ] && [ "$remove_test_dir" = 'true' ]; then
         __debug "Removing directory: '%s'\\n" "$TEST_DIR"
         rmdir "$TEST_DIR"
     fi
