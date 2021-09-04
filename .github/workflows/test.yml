@@ -1,7 +1,7 @@
 ---
-# This is a basic workflow to test the project
+# This is a basic workflow to help you get started with Actions
 
-name: test
+name: Test
 
 # Controls when the action will run.
 on:  # yamllint disable-line rule:truthy
@@ -16,20 +16,25 @@ on:  # yamllint disable-line rule:truthy
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
+
   # This workflow contains a single job called "build"
   build:
+
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
-      - name: Checkout dependency shunit2
-        uses: actions/checkout@v2
+      # Checks-out the shunit2 repo
+      - uses: actions/checkout@v2
         with:
+          # Repository name with owner. For example, actions/checkout
+          # Default: ${{ github.repository }}
           repository: kward/shunit2
+          # Relative path under $GITHUB_WORKSPACE to place the repository
           path: shunit2
 
       # Install required packages dependencies
@@ -38,6 +43,55 @@ jobs:
           DEBIAN_FRONTEND=noninteractive sudo apt-get -q -y install \
             make gettext gzip tar grep sed mawk coreutils
 
-      # Runs make test
-      - name: Run make test
-        run: SHUNIT2="${{ github.workspace }}/shunit2/shunit2" make test
+      # Build the program
+      - name: Building the program
+        run: make
+
+      # Create a BTRFS file
+      - name: Creating an image file with a BTRFS filesystem
+        run: rm -f test.img && truncate -s 150M test.img && sudo mkfs.btrfs -f test.img
+
+      # Unmount (preventive)
+      - name: Unmounting the BTRFS image file (preventive)
+        run: if LC_ALL=C mount | grep -q ' on .*test\.mnt'; then sudo umount -v test.mnt; fi
+
+      # Mount it
+      - name: Mouting the BTRFS image file
+        run: |
+          sudo rm -fr test.mnt && sudo mkdir test.mnt && \
+          sudo mount -v -t btrfs -o loop test.img test.mnt
+
+      # Running the tests
+      - name: Running the tests
+        run: |
+          TMPDIR="$(pwd)"/.tmp TEST_DIR="$(pwd)"/test.mnt \
+            SHUNIT2="$(realpath "$(pwd)"/../shunit2/shunit2)" \
+            BTRFS_DIFF="$(pwd)"/btrfs-diff.sh sh test.sh
+
+      # Unmount
+      - name: Unmounting the BTRFS image file
+        run: if LC_ALL=C mount | grep -q ' on .*test\.mnt'; then sudo umount -v test.mnt; fi
+        if: always()
+
+      # Cleanup
+      - name: Cleaning up
+        run: rm -fr .tmp test.img test.mnt
+        if: always()
+
+      # List files
+      - name: Listing files
+        run: |
+          ls -alh --color "$(pwd)" && \
+          ls -alh --color "$(pwd)"../ && \
+          ls -alh --color "$(pwd)"../shunit2
+        if: failure()
+
+      # Display the PATH
+      - name: Display the PATH
+        run: 'echo "PATH: $PATH"'
+        if: failure()
+
+      # Display the mounted fs
+      - name: Display the mounted fs
+        run: mount
+        if: failure()
