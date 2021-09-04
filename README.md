@@ -7,12 +7,19 @@ It is a single file *POSIX* shell script of ~ 570 lines of code (without blanks 
 
 ![Release](https://img.shields.io/github/v/release/mbideau/btrfs-diff-sh)
 ![Release Date](https://img.shields.io/github/release-date/mbideau/btrfs-diff-sh)  
-[![Build](https://github.com/mbideau/btrfs-diff-sh/actions/workflows/build.yml/badge.svg)](https://github.com/mbideau/btrfs-diff-sh/actions/workflows/build.yml)
-[![Shellcheck](https://github.com/mbideau/btrfs-diff-sh/actions/workflows/shellcheck.yml/badge.svg)](https://github.com/mbideau/btrfs-diff-sh/actions/workflows/shellcheck.yml)
+[![Build](https://github.com/mbideau/btrfs-diff-sh/actions/workflows/build.yml/badge.svg)
+](https://github.com/mbideau/btrfs-diff-sh/actions/workflows/build.yml)
+[![Test](https://github.com/mbideau/btrfs-diff-sh/actions/workflows/test.yml/badge.svg)
+](https://github.com/mbideau/btrfs-diff-sh/actions/workflows/test.yml)
+[![Shellcheck](https://github.com/mbideau/btrfs-diff-sh/actions/workflows/shellcheck.yml/badge.svg)
+](https://github.com/mbideau/btrfs-diff-sh/actions/workflows/shellcheck.yml)
 ![Shell POSIX](https://img.shields.io/badge/shell-POSIX-darkgreen)  
-[![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0)
-[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg)](CODE_OF_CONDUCT.md)
-[![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
+[![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)
+](http://www.gnu.org/licenses/gpl-3.0)
+[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg)
+](CODE_OF_CONDUCT.md)
+[![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)
+](https://conventionalcommits.org)
 
 
 ## USAGE
