@@ -1,14 +1,15 @@
+---
 # This is a basic workflow to help you get started with Actions
 
 name: build
 
-# Controls when the action will run. 
-on:
+# Controls when the action will run.
+on:  # yamllint disable-line rule:truthy
   # Triggers the workflow on push or pull request events but only for the main branch
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -27,7 +28,9 @@ jobs:
 
       # Install required packages dependencies
       - name: Install required packages dependencies
-        run: DEBIAN_FRONTEND=noninteractive sudo apt-get -q -y install make gettext gzip tar grep sed mawk coreutils
+        run: |
+          DEBIAN_FRONTEND=noninteractive sudo apt-get -q -y install \
+            make gettext gzip tar grep sed mawk coreutils
 
       # Runs make
       - name: Run make
