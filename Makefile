@@ -210,11 +210,11 @@ define generate_man_from_mainscript_help
 	else \
 		echo "## Updating man page '$(2)' [$$_locale_short]"; \
 	fi; \
-	$(GIMME_A_MAN)                                    \
+	if ! $(GIMME_A_MAN)                                    \
 		--locale "$$_locale"                          \
 		$(GIMME_A_MAN_FLAGS) $(GIMME_A_MAN_FLAGS_ALL) \
 		$(GIMME_A_MAN_ARGS_ALL)                       \
-	| $(GZIP) $(GZIPFLAGS) > "$(2)";
+	| $(GZIP) $(GZIPFLAGS) > "$(2)"; return 1; fi;
 endef
 
 
