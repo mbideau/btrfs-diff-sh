@@ -117,10 +117,10 @@ oneTimeSetUp()
     if [ ! -d "$TEST_DIR" ]; then
         __debug "Creating directory: '%s'\\n" "$TEST_DIR"
         mkdir "$TEST_DIR"
-        $use_sudo chown "$USER" "$TEST_DIR"
-        $use_sudo chmod u=rwx "$TEST_DIR"
         remove_test_dir=true
     fi
+    $use_sudo chown "$USER" "$TEST_DIR"
+    $use_sudo chmod u=rwx "$TEST_DIR"
 
     # remove exiting files
     tearDown
