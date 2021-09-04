@@ -66,7 +66,7 @@ jobs:
         run: |
           TMPDIR="$(pwd)"/.tmp TEST_DIR="$(pwd)"/test.mnt \
             SHUNIT2="$(pwd)"/shunit2/shunit2 \
-            BTRFS_DIFF="$(pwd)"/btrfs-diff.sh sh test.sh
+            BTRFS_DIFF="$(pwd)"/btrfs_diff.sh sh test.sh
 
       # Unmount
       - name: Unmounting the BTRFS image file
