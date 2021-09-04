@@ -165,7 +165,7 @@ MSGMERGEFLAGS      ?=
 MSGMERGEFLAGS_ALL  := --quiet
 MGSCATFLAGS        ?=
 MGSCATFLAGS_ALL    := --sort-output --width=$(WIDTH)
-GZIPFLAGS          ?=
+GZIPFLAGS          ?= --force
 TARFLAGS           ?= --gzip
 SHELLCHECKFLAGS    ?=
 SHELLCHECKFLAGS_ALL:= --check-sourced --external-sources
@@ -210,21 +210,26 @@ define generate_man_from_mainscript_help
 	else \
 		echo "## Updating man page '$(2)' [$$_locale_short]"; \
 	fi; \
-	if ! $(GIMME_A_MAN)                                    \
+	$(GIMME_A_MAN)                                    \
 		--locale "$$_locale"                          \
 		$(GIMME_A_MAN_FLAGS) $(GIMME_A_MAN_FLAGS_ALL) \
 		$(GIMME_A_MAN_ARGS_ALL)                       \
-	| $(GZIP) $(GZIPFLAGS) > "$(2)"; then exit 1; fi;
+		> "$(2)";
 endef
 
 
+# compress the man pages
+$(MAN_DIR)/%.texi.gz: $(MAN_DIR)/%.texi
+	@echo "## Compressing man page '$<' to '$@'"
+	@$(GZIP) $(GZIPFLAGS) "$<"
+
 # special case for english manual that do not depends on any translation but on main script
-$(MAN_DIR)/en.texi.gz: $(MAIN_SCRIPT)
+$(MAN_DIR)/en.texi: $(MAIN_SCRIPT)
 	@$(call generate_man_from_mainscript_help,en,$@)
 
 
 # manuals depends on translations
-$(MAN_DIR)/%.texi.gz: $(LOCALE_DIR)/%/LC_MESSAGES/$(TEXTDOMAIN).mo $(MAIN_SCRIPT)
+$(MAN_DIR)/%.texi: $(LOCALE_DIR)/%/LC_MESSAGES/$(TEXTDOMAIN).mo $(MAIN_SCRIPT)
 	@$(call generate_man_from_mainscript_help,$*,$@)
 
 
