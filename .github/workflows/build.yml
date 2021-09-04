@@ -26,6 +26,15 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
+      # Checks-out the gimme-a-man repo
+      - uses: actions/checkout@v2
+        with:
+          # Repository name with owner. For example, actions/checkout
+          # Default: ${{ github.repository }}
+          repository: mbideau/gimme-a-man
+          # Relative path under $GITHUB_WORKSPACE to place the repository
+          path: gimme-a-man
+
       # Install required packages dependencies
       - name: Install required packages dependencies
         run: |
@@ -34,4 +43,4 @@ jobs:
 
       # Runs make
       - name: Run make
-        run: make
+        run: GIMME_A_MAN="$(pwd)"/gimme-a-man/gimme_a_man.sh make
