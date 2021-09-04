@@ -66,10 +66,30 @@ if [ "$SHUNIT2" = '' ]; then
 fi
 
 # configuration of the test environment
-TEST_DIR="$THIS_DIR"/tests
+if [ "$TMPDIR" = '' ]; then
+    TMPDIR="$THIS_DIR"/.tmp
+fi
+if [ "$TEST_DIR" = '' ]; then
+    TEST_DIR="$THIS_DIR"/testdir
+fi
 DATA_DIR="$TEST_DIR"/data
 SNAPS_DIR="$TEST_DIR"/snaps
 
+use_sudo=
+if [ "$(id -u)" != '0' ]; then
+    echo "Using sudo"
+    use_sudo=sudo
+fi
+
+echo "Test directory: '$TEST_DIR'"
+[ ! -d "$TEST_DIR" ] && mkdir -p "$TEST_DIR"
+$use_sudo chown "$USER" "$TEST_DIR"
+$use_sudo chmod u=rwx "$TEST_DIR"
+
+echo "Tmp directory: '$TMPDIR'"
+[ ! -d "$TMPDIR" ] && mkdir -p "$TMPDIR"
+$use_sudo chown "$USER" "$TMPDIR"
+$use_sudo chmod u=rwx "$TMPDIR"
 
 # helper functions
 
@@ -207,11 +227,11 @@ ENDCAT
                 "$(echo "$B" | sed "s|$TEST_DIR/\\?||g")"
 
             # produce a diff using the 'btrfs-diff' binary
-            LC_ALL=C $use_shell "$BTRFS_DIFF" -d "$A" "$B" >/tmp/out.diff 2>&1 || true
-            __debug "Result:\\n---\\n%s\\n---\\n" "$(cat /tmp/out.diff)"
+            LC_ALL=C $use_shell "$BTRFS_DIFF" -d "$A" "$B" >"$TMPDIR"/out.diff 2>&1 || true
+            __debug "Result:\\n---\\n%s\\n---\\n" "$(cat "$TMPDIR"/out.diff)"
 
             # diff the diffs between them and report differences
-            assertContains "$(cat /tmp/out.diff)" \
+            assertContains "$(cat "$TMPDIR"/out.diff)" \
                 "Note: same output as with the standard 'diff' utility"
         done
         [ "$DEBUG_TEST" = 'true' ] || echo
@@ -225,13 +245,13 @@ ENDCAT
 test_trickyStream()
 {
     _ret=0
-    LC_ALL=C $use_shell "$BTRFS_DIFF" --file "$THIS_DIR"/test.stream >/tmp/out.diff 2>/tmp/err.diff || _ret=$?
+    LC_ALL=C $use_shell "$BTRFS_DIFF" --file "$THIS_DIR"/test.stream >"$TMPDIR"/out.diff 2>"$TMPDIR"/err.diff || _ret=$?
     assertSame "1" "$_ret"
-    assertSame '' '' "$(cat /tmp/err.diff)"
+    assertSame '' '' "$(cat "$TMPDIR"/err.diff)"
     assertSame 'operations' \
 "  added: /file1_1
   added: /file1_2
-deleted: /file2_1" "$(cat /tmp/out.diff)"
+deleted: /file2_1" "$(cat "$TMPDIR"/out.diff)"
 }
 
 # # test the clone instruction
@@ -267,8 +287,8 @@ deleted: /file2_1" "$(cat /tmp/out.diff)"
 #     btrfs subvolume snapshot -r "$DATA_DIR" "$SNAPS_DIR"/data_content > /dev/null
 # 
 #     __debug "Comparing before and after content\\n"
-#     DEBUG=btrfs-diff LC_ALL=C $use_shell "$BTRFS_DIFF" -d "$SNAPS_DIR/data_subvol_empty" "$SNAPS_DIR/data_subvol_content" >/tmp/out.diff 2>/tmp/err.diff || true
-#     __debug "Result:\\n---\\n%s\\n--- err\\n%s\\n---\\n" "$(cat /tmp/out.diff)" "$(cat /tmp/err.diff)"
+#     DEBUG=btrfs-diff LC_ALL=C $use_shell "$BTRFS_DIFF" -d "$SNAPS_DIR/data_subvol_empty" "$SNAPS_DIR/data_subvol_content" >"$TMPDIR"/out.diff 2>"$TMPDIR"/err.diff || true
+#     __debug "Result:\\n---\\n%s\\n--- err\\n%s\\n---\\n" "$(cat "$TMPDIR"/out.diff)" "$(cat "$TMPDIR"/err.diff)"
 # 
 #     __debug "Set the data dir '$DATA_DIR/subvol' into read-only mode\\n"
 #     btrfs property set "$DATA_DIR/subvol" ro true
@@ -306,14 +326,14 @@ deleted: /file2_1" "$(cat /tmp/out.diff)"
 #     done
 # 
 #     btrfs property set "$DATA_DIR" ro true
-#     $use_sudo btrfs send --no-data "$DATA_DIR" >/tmp/send.data
+#     $use_sudo btrfs send --no-data "$DATA_DIR" >"$TMPDIR"/send.data
 #     btrfs property set "$DATA_DIR" ro false
 #     # shellcheck disable=SC2086
-#     $use_sudo btrfs receive -f /tmp/send.data --dump >/tmp/receive.data
+#     $use_sudo btrfs receive -f "$TMPDIR"/send.data --dump >"$TMPDIR"/receive.data
 # 
 #     __debug "Comparing first and second snapshots\\n"
-#     DEBUG=btrfs-diff LC_ALL=C $use_shell "$BTRFS_DIFF" -d "$SNAPS_DIR/first" "$SNAPS_DIR/second" >/tmp/out.diff 2>/tmp/err.diff || true
-#     __debug "Result:\\n---\\n%s\\n--- err\\n%s\\n---\\n" "$(cat /tmp/out.diff)" "$(cat /tmp/err.diff)"
+#     DEBUG=btrfs-diff LC_ALL=C $use_shell "$BTRFS_DIFF" -d "$SNAPS_DIR/first" "$SNAPS_DIR/second" >"$TMPDIR"/out.diff 2>"$TMPDIR"/err.diff || true
+#     __debug "Result:\\n---\\n%s\\n--- err\\n%s\\n---\\n" "$(cat "$TMPDIR"/out.diff)" "$(cat "$TMPDIR"/err.diff)"
 # 
 #     __debug "Set the data dir 'subvol' of subvolumes into read-write mode\\n"
 #     for d in first second; do btrfs property set "$DATA_DIR/$d/subvol" ro false; done
