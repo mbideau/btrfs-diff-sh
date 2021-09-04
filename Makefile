@@ -214,7 +214,7 @@ define generate_man_from_mainscript_help
 		--locale "$$_locale"                          \
 		$(GIMME_A_MAN_FLAGS) $(GIMME_A_MAN_FLAGS_ALL) \
 		$(GIMME_A_MAN_ARGS_ALL)                       \
-	| $(GZIP) $(GZIPFLAGS) > "$(2)"; then return 1; fi;
+	| $(GZIP) $(GZIPFLAGS) > "$(2)"; then exit 1; fi;
 endef
 
 
