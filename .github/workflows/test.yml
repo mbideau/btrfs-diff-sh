@@ -77,20 +77,3 @@ jobs:
       - name: Cleaning up
         run: rm -fr .tmp test.img test.mnt
         if: always()
-
-      # List files
-      - name: Listing files
-        run: |
-          ls -alh --color "$(pwd)" && \
-          ls -alh --color "$(pwd)"/..
-        if: failure()
-
-      # Display the PATH
-      - name: Display the PATH
-        run: 'echo "PATH: $PATH"'
-        if: failure()
-
-      # Display the mounted fs
-      - name: Display the mounted fs
-        run: mount
-        if: failure()
