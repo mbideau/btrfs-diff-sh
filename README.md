@@ -375,10 +375,7 @@ If you want a clean tarball of the sources, you can run :
 
 By order of priority :
 
-* [ ] customize the Github *test* action to have a btrfs filesystem (in a file and mounted to a
-  writable path)
-* [ ] add a *test: pass* badge when the test will be able to pass and re-activate the action
-* [ ] ensure the script cleans everything after itself, same for the test script
+* [ ] create a screencast to show off the program
 * [ ] improve script performances by reducing the amount of IO/subprocess (maybe switch to bash
   only to use its strings functions)
 * [ ] create a Github action to automaticaly insert the help into the README from the exectuion of
