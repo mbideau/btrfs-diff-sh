@@ -65,7 +65,7 @@ jobs:
       - name: Running the tests
         run: |
           TMPDIR="$(pwd)"/.tmp TEST_DIR="$(pwd)"/test.mnt \
-            SHUNIT2="$(realpath "$(pwd)"/../shunit2/shunit2)" \
+            SHUNIT2="$(pwd)"/shunit2/shunit2 \
             BTRFS_DIFF="$(pwd)"/btrfs-diff.sh sh test.sh
 
       # Unmount
@@ -82,8 +82,7 @@ jobs:
       - name: Listing files
         run: |
           ls -alh --color "$(pwd)" && \
-          ls -alh --color "$(pwd)"../ && \
-          ls -alh --color "$(pwd)"../shunit2
+          ls -alh --color "$(pwd)"/..
         if: failure()
 
       # Display the PATH
