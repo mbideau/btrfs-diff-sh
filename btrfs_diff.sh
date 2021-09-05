@@ -433,7 +433,7 @@ while read -r line; do
 
     # depending on the operation
     case "$op" in
-        mkfile|mkfifo|mkdir)
+        mkfile|mkfifo|mkdir|mknod|mksock)
             _obj_line="$op|$path|$rel_path"
             debug "${_ind}adding to object buffer: '%s'\\n" "$_obj_line"
             echo "$_obj_line" >> "$_objects_buffer"
@@ -669,7 +669,7 @@ while read -r line; do
             fi
             ;;
 
-        chown|chmod|set_xattr)
+        chown|chmod|set_xattr|remove_xattr)
             if [ "$opt_with_props" = 'true' ]; then
                 debug ">>> %s: '%s'\\n" "$op_props" "$rel_path"
                 echo "$op_props: $rel_path" >> "$_out"
