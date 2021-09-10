@@ -403,11 +403,12 @@ _out="$_tmp_dir"/out.txt
 _newdirs_buffer="$_tmp_dir"/newdirs_buffer.txt
 _newfiles_buffer="$_tmp_dir"/newfiles_buffer.txt
 _extfiles_buffer="$_tmp_dir"/extfiles_buffer.txt
+_chgfiles_buffer="$_tmp_dir"/chgfiles_buffer.txt
 _deldirs_buffer="$_tmp_dir"/deldirs_buffer.txt
 _delfiles_buffer="$_tmp_dir"/delfiles_buffer.txt
 _objects_buffer="$_tmp_dir"/objects_buffer.txt
-touch "$_out" "$_newdirs_buffer" "$_newfiles_buffer" "$_extfiles_buffer" "$_deldirs_buffer" \
-      "$_delfiles_buffer" "$_objects_buffer"
+touch "$_out" "$_newdirs_buffer" "$_newfiles_buffer" "$_extfiles_buffer" "$_chgfiles_buffer" \
+      "$_deldirs_buffer" "$_delfiles_buffer" "$_objects_buffer"
 
 
 # read each line of the raw diff and try to produce a more realistic view (like standard 'diff')
@@ -643,6 +644,8 @@ while read -r line; do
             else
                 debug ">>> %s: '%s'\\n" "$op_changed" "$rel_path"
                 echo "$op_changed: $rel_path" >> "$_out"
+                echo "$rel_path" >> "$_chgfiles_buffer"
+                debug "${_ind}adding '%s' to the chgfiles buffer\\n" "$rel_path"
             fi
             ;;
 
@@ -673,6 +676,8 @@ while read -r line; do
             else
                 debug ">>> %s: '%s'\\n" "$op_changed" "$rel_path"
                 echo "$op_changed: $rel_path" >> "$_out"
+                echo "$rel_path" >> "$_chgfiles_buffer"
+                debug "${_ind}adding '%s' to the chgfiles buffer\\n" "$rel_path"
             fi
             ;;
 
@@ -682,6 +687,11 @@ while read -r line; do
                 # props on a new file or a changed file
                 if grep -q "^$(escape_pattern "$path")\$" "$_newfiles_buffer"; then
                     debug "${_ind}props on a new/changed file\\n"
+                    debug "${_ind}ignored\\n"
+
+                # props on a changed file
+                elif grep -q "^$(escape_pattern "$path")\$" "$_chgfiles_buffer"; then
+                    debug "${_ind}props on a changed file\\n"
                     debug "${_ind}ignored\\n"
 
                 # props on a recently extended file
@@ -699,6 +709,8 @@ while read -r line; do
 
                     debug ">>> %s: '%s'\\n" "$op_props" "$rel_path"
                     echo "$op_props: $rel_path" >> "$_out"
+                    echo "$rel_path" >> "$_chgfiles_buffer"
+                    debug "${_ind}adding '%s' to the chgfiles buffer\\n" "$rel_path"
                 fi
             fi
             ;;
@@ -781,6 +793,11 @@ while read -r line; do
                 debug "${_ind}write on a new/changed file\\n"
                 debug "${_ind}ignored\\n"
 
+            # write on a changed file
+            elif grep -q "^$(escape_pattern "$path")\$" "$_chgfiles_buffer"; then
+                debug "${_ind}write on a changed file\\n"
+                debug "${_ind}ignored\\n"
+
             # write on a recently extended file
             elif grep -q "^$(escape_pattern "$path")\$" "$_extfiles_buffer"; then
                 debug "${_ind}write on a recently extended file\\n"
@@ -790,6 +807,8 @@ while read -r line; do
             else
                 debug ">>> %s: '%s'\\n" "$op_changed" "$rel_path"
                 echo "$op_changed: $rel_path" >> "$_out"
+                echo "$rel_path" >> "$_chgfiles_buffer"
+                debug "${_ind}adding '%s' to the chgfiles buffer\\n" "$rel_path"
             fi
             ;;
 
@@ -799,6 +818,11 @@ while read -r line; do
                 # times on a new file or a changed file
                 if grep -q "^$(escape_pattern "$path")\$" "$_newfiles_buffer"; then
                     debug "${_ind}times on a new/changed file\\n"
+                    debug "${_ind}ignored\\n"
+
+                # times on a changed file
+                elif grep -q "^$(escape_pattern "$path")\$" "$_chgfiles_buffer"; then
+                    debug "${_ind}times on a changed file\\n"
                     debug "${_ind}ignored\\n"
 
                 # times on a recently extended file
@@ -816,6 +840,8 @@ while read -r line; do
 
                     debug ">>> %s: '%s'\\n" "$op_times" "$rel_path"
                     echo "$op_times: $rel_path" >> "$_out"
+                    echo "$rel_path" >> "$_chgfiles_buffer"
+                    debug "${_ind}adding '%s' to the chgfiles buffer\\n" "$rel_path"
                 fi
             fi
             ;;
