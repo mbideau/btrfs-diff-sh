@@ -506,7 +506,7 @@ while read -r line; do
                 _op="$(echo "$_match" | awk -F '|' '{print $1}')"
                 _type=
                 case "$_op" in
-                    mkfile|mkfifo|mkdir) _type="$(echo "$_op" | sed 's/^mk//')" ;;
+                    mkfile|mkfifo|mkdir|mknod|mksock) _type="$(echo "$_op" | sed 's/^mk//')" ;;
                     link|symlink) _type="$_op" ;;
                     to_object) ;; # type unknown when its a renaming
                     *)
