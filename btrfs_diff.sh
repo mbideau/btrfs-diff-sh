@@ -578,12 +578,19 @@ while read -r line; do
                 debug "${_ind}ignored\\n"
 
             # regular rename
-            # Note: I think they doesn't exist, because they are made with link/unlink
             else
                 debug "${_ind}regular rename from '%s' to '%s'\\n" "$path" "$_dst"
-                debug "${_ind}proof that, actually, real rename are a thing !\\n"
                 debug ">>> %s: '%s' to '%s'\\n" "$op_renamed" "$rel_path" "$_dst_rel"
                 echo "$op_renamed: $rel_path to $_dst_rel" >> "$_out"
+
+                # update new things buffers
+                if [ "$_type" = 'dir' ]; then
+                    debug "${_ind}adding '%s' to the newdirs buffer\\n" "$_dst"
+                    echo "$_dst" >> "$_newdirs_buffer"
+                else
+                    debug "${_ind}adding '%s' to the newfiles buffer\\n" "$_dst"
+                    echo "$_dst" >> "$_newfiles_buffer"
+                fi
             fi
             ;;
 
