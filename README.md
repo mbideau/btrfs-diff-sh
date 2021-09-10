@@ -3,7 +3,7 @@
 Analyze differences between two BTRFS snapshots (like
 [GNU diff](https://www.gnu.org/software/diffutils/manual/) for directories).
 
-It is a single file *POSIX* shell script of ~ 570 lines of code (without blanks and comments).
+It is a single file *POSIX* shell script of ~ 540 lines of code (without blanks and comments).
 
 ![Release](https://img.shields.io/github/v/release/mbideau/btrfs-diff-sh)
 ![Release Date](https://img.shields.io/github/release-date/mbideau/btrfs-diff-sh)  
