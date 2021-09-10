@@ -406,8 +406,8 @@ _extfiles_buffer="$_tmp_dir"/extfiles_buffer.txt
 _deldirs_buffer="$_tmp_dir"/deldirs_buffer.txt
 _delfiles_buffer="$_tmp_dir"/delfiles_buffer.txt
 _objects_buffer="$_tmp_dir"/objects_buffer.txt
-touch  "$_out" "$_newdirs_buffer" "$_newfiles_buffer" "$_deldirs_buffer" "$_delfiles_buffer" \
-       "$_objects_buffer"
+touch "$_out" "$_newdirs_buffer" "$_newfiles_buffer" "$_extfiles_buffer" "$_deldirs_buffer" \
+      "$_delfiles_buffer" "$_objects_buffer"
 
 
 # read each line of the raw diff and try to produce a more realistic view (like standard 'diff')
