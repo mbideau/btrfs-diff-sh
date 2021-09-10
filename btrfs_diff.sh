@@ -678,8 +678,28 @@ while read -r line; do
 
         chown|chmod|set_xattr|remove_xattr)
             if [ "$opt_with_props" = 'true' ]; then
-                debug ">>> %s: '%s'\\n" "$op_props" "$rel_path"
-                echo "$op_props: $rel_path" >> "$_out"
+
+                # props on a new file or a changed file
+                if grep -q "^$(escape_pattern "$path")\$" "$_newfiles_buffer"; then
+                    debug "${_ind}props on a new/changed file\\n"
+                    debug "${_ind}ignored\\n"
+
+                # props on a recently extended file
+                elif grep -q "^$(escape_pattern "$path")\$" "$_extfiles_buffer"; then
+                    debug "${_ind}props on a recently extended file\\n"
+                    debug "${_ind}ignored\\n"
+
+                # props on a new dir
+                elif grep -q "^$(escape_pattern "$path")\$" "$_newdirs_buffer"; then
+                    debug "${_ind}props on a newdir\\n"
+                    debug "${_ind}ignored\\n"
+
+                # normal case
+                else
+
+                    debug ">>> %s: '%s'\\n" "$op_props" "$rel_path"
+                    echo "$op_props: $rel_path" >> "$_out"
+                fi
             fi
             ;;
 
@@ -775,8 +795,28 @@ while read -r line; do
 
         utimes)
             if [ "$opt_with_times" = 'true' ]; then
-                debug ">>> %s: '%s'\\n" "$op_times" "$rel_path"
-                echo "$op_times: $rel_path" >> "$_out"
+
+                # times on a new file or a changed file
+                if grep -q "^$(escape_pattern "$path")\$" "$_newfiles_buffer"; then
+                    debug "${_ind}times on a new/changed file\\n"
+                    debug "${_ind}ignored\\n"
+
+                # times on a recently extended file
+                elif grep -q "^$(escape_pattern "$path")\$" "$_extfiles_buffer"; then
+                    debug "${_ind}times on a recently extended file\\n"
+                    debug "${_ind}ignored\\n"
+
+                # times on a new dir
+                elif grep -q "^$(escape_pattern "$path")\$" "$_newdirs_buffer"; then
+                    debug "${_ind}times on a newdir\\n"
+                    debug "${_ind}ignored\\n"
+
+                # normal case
+                else
+
+                    debug ">>> %s: '%s'\\n" "$op_times" "$rel_path"
+                    echo "$op_times: $rel_path" >> "$_out"
+                fi
             fi
             ;;
 
